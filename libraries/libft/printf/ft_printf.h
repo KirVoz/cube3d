@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaleksee <aaleksee@student.42yerevan.am>   +#+  +:+       +#+        */
+/*   By: kvoznese <kvoznese@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 04:29:48 by aaleksee          #+#    #+#             */
-/*   Updated: 2024/03/14 04:29:50 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/01/31 17:11:05 by kvoznese         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <limits.h>
-# include "../../../includes/libft.h"
+# include "../libft.h"
 
 typedef struct s_format
 {
