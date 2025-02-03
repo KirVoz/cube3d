@@ -1,57 +1,63 @@
+NAME =			cub3D
+
+SRC_PATH =		sources
+UTL_PATH =		sources/utils
+INC_PATH =		includes
+LIB_PATH =		libraries
+LFT_PATH =		$(LIB_PATH)/libft
+OBJ_DIR  =		objects
+
 SRC =	main.c \
-		./src/render.c \
-		./src/map.c \
+		$(SRC_PATH)/render.c \
+		$(SRC_PATH)/map.c
 
-OBJS = $(SRC:.c=.o)
+OSRC  = 	$(SRC:%.c=$(OBJ_DIR)/%.o)
+MLX   =		$(MLX_PATH)/libmlx.a
+LIBFT = 	$(LFT_PATH)/libft.a
+INCLUDES = 	$(INC_PATH)/cub3d.h
 
-HEAD = cube3d.h
-
-NAME = cube3d
-
-MAKE_MLX = cd ./libraries/Minilibx/ && make
-
-MAKE_MLXL = cd ./libraries/Minilibx_l/ && make
-
-MAKE_LIB = cd ./libraries/libft/ && make
 
 CC = cc
+CFLAGS = -Wall -Wextra -Werror -g -I./includes #-g -fsanitize=thread
 
-CFLAGS = -Wall -Werror -Wextra -g #-fsanitize=address
-
-RM = rm -rf
-
-LIBFT = ft
-
-LIBFT_DIR = libft
-
-MACOS = -framework OpenGL -framework AppKit
-
-LINUX = -lmlx -lXext -lX11 -lm
+ifeq ($(shell uname),Darwin)
+ MLX_PATH = $(LIB_PATH)/Minilibx
+ MLX_FLAGS = -L$(MLX_PATH) -lmlx -framework OpenGL -framework AppKit
+else
+ MLX_PATH = $(LIB_PATH)/Minilibx_l
+ MLX_FLAGS = -L$(MLX_PATH) -lmlx -lXext -lX11 -lm
+endif
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	@$(MAKE_MLXL)
-	@$(MAKE_LIB)
-	@echo "Compiling..."
-	@$(CC) $(CFLAGS) $(OBJS) ./libraries/libft/libft.a ./libraries/Minilibx_l/libmlx.a $(LINUX) -o $(NAME)
-	@echo "Completed! 🤠"
-	
-%.o: %.c
+$(NAME): $(OSRC) $(LIBFT) $(MLX)
+	@$(CC) $(CFLAGS) ${OSRC} $(LIBFT) -I$(MLX_PATH) $(MLX_FLAGS) -o $(NAME)
+	@echo "cub3D created"
+
+$(LIBFT):
+	@make -C $(LFT_PATH)
+
+$(MLX):
+	@make -C $(MLX_PATH)
+
+ex: re
+	@./cub3D
+
+$(OBJ_DIR)/%.o: %.c #$(INCLUDES)
+	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-fclean: clean
-	@$(RM) $(NAME)
-	@$(MAKE) fclean -C ./libraries/libft
-	@$(MAKE) clean -C ./libraries/Minilibx_l
-	@echo "Completed! 😈"
-	
 clean:
-	@$(RM) $(NAME)
-	@$(MAKE) clean -C ./libraries/libft
-	@$(RM) -rf ./libraries/libft/libft.a
-	@rm -f ${OBJS}
+	@rm -rf $(OBJ_DIR)
+	@make clean -C $(LFT_PATH)
+	@make clean -C $(MLX_PATH)
+	@echo "Object files cleaned"
 
-re:	fclean all
+fclean: clean
+	@rm -rf $(NAME)
+	make fclean -C $(LFT_PATH)
+	@echo "Executable and libraries cleaned"
 
-.PHONY: all clean fclean re
+re: fclean all
+
+.PHONY: all clean fclean re ex

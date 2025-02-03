@@ -1,4 +1,4 @@
-#include "../includes/cube3d.h"
+#include "cub3d.h"
 
 void draw_scene(t_data *data)
 {

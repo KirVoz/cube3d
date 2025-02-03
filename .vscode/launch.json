@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/aleks/Developer/42/cube3d",
+      "program": "/Users/aleks/Developer/42/cube3d/build/Debug/outDebug"
+    }
+  ]
+}

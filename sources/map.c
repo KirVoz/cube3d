@@ -1,4 +1,4 @@
-#include "../includes/cube3d.h"
+#include "cub3d.h"
 
 int map[MAP_HEIGHT][MAP_WIDTH] = {
     {1,1,1,1,1,1,1,1,1,1},
