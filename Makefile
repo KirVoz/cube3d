@@ -1,5 +1,4 @@
 SRC =	main.c \
-		./src/dda.c \
 		./src/render.c \
 		./src/map.c \
 
@@ -10,6 +9,8 @@ HEAD = cube3d.h
 NAME = cube3d
 
 MAKE_MLX = cd ./libraries/Minilibx/ && make
+
+MAKE_MLXL = cd ./libraries/Minilibx_l/ && make
 
 MAKE_LIB = cd ./libraries/libft/ && make
 
@@ -30,10 +31,10 @@ LINUX = -lmlx -lXext -lX11 -lm
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(MAKE_MLX)
+	@$(MAKE_MLXL)
 	@$(MAKE_LIB)
 	@echo "Compiling..."
-	@$(CC) $(CFLAGS) $(OBJS) ./libraries/libft/libft.a ./libraries/Minilibx/libmlx.a $(MACOS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) ./libraries/libft/libft.a ./libraries/Minilibx_l/libmlx.a $(LINUX) -o $(NAME)
 	@echo "Completed! 🤠"
 	
 %.o: %.c
@@ -42,7 +43,7 @@ $(NAME): $(OBJS)
 fclean: clean
 	@$(RM) $(NAME)
 	@$(MAKE) fclean -C ./libraries/libft
-	@$(MAKE) clean -C ./libraries/Minilibx
+	@$(MAKE) clean -C ./libraries/Minilibx_l
 	@echo "Completed! 😈"
 	
 clean:
