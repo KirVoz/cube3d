@@ -50,6 +50,8 @@ typedef struct s_ray
 int			key_press(int keycode, t_data *data);
 int			key_release(int keycode, t_data *data);
 void		move_player(t_data *data);
+void		rotate_right(t_data *data, double rotSpeed);
+void		rotate_left(t_data *data, double rotSpeed);
 
 void		draw_map(t_data *data);
 void		draw_scene(t_data *data);
