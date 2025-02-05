@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 void draw_scene(t_data *data)
 {
@@ -91,7 +91,7 @@ void draw_scene(t_data *data)
         int y;
         for (y = drawStart; y < drawEnd; y++)
         {
-            my_mlx_pixel_put(data, MAP_AREA_WIDTH + x, y, color);
+            my_mlx_pixel_put(data, x, y, color);
         }
     }
 }

@@ -8,8 +8,13 @@ LFT_PATH =		$(LIB_PATH)/libft
 OBJ_DIR  =		objects
 
 SRC =	main.c \
-		$(SRC_PATH)/render.c \
-		$(SRC_PATH)/map.c
+		$(SRC_PATH)/map.c \
+		$(SRC_PATH)/move/keys.c \
+		$(SRC_PATH)/move/move_player.c \
+		$(SRC_PATH)/draw/draw_map.c \
+		$(SRC_PATH)/draw/draw_player.c \
+		$(SRC_PATH)/render/render_frames.c \
+		$(SRC_PATH)/render/render.c \
 
 OSRC  = 	$(SRC:%.c=$(OBJ_DIR)/%.o)
 MLX   =		$(MLX_PATH)/libmlx.a
