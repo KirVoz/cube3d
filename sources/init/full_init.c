@@ -1,6 +1,6 @@
-#include "../libraries/cube3d.h"
+#include "../includes/cub3d.h"
 
-void full_init(t_data *data)
+void	full_init(t_data *data)
 {
-	//init structures
+	// init structures
 }

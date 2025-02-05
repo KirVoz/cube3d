@@ -16,25 +16,7 @@
 #define SCENE_AREA_WIDTH WIDTH
 #define SCENE_AREA_HEIGHT HEIGHT
 #define M_PI 3.14159265358979323846
-
-// typedef struct s_data {
-//     void *mlx;
-//     void *win;
-//     void *img;
-//     char *addr;
-//     int bpp;
-//     int line_length;
-//     int endian;
-
-//     double pitch;
-//     double posX, posY;
-//     double dirX, dirY;
-//     double planeX, planeY;
-
-//     int (*map1)[MAP_HEIGHT][MAP_WIDTH];
-// 	int w, a, s, d;
-//     int left, right;
-//     double sense, rotSpeed, oldDirX, oldPlaneX;
-// } t_data;
+#define FOV 60.0
+#define planeLen (FOV /2 * M_PI / 180)
 
 #endif

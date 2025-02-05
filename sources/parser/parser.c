@@ -1,9 +1,7 @@
-#include "cube3d.h"
+#include "../includes/cub3d.h"
 
 int parser(char **map)
 {
 	(void)map;
 	return (1);
 }
-
-
