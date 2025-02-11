@@ -48,35 +48,14 @@ void	hooks(t_data *data)
 	// mlx_hook(data->win, 6, 1L<<6, mouse_move, data); // macos
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	t_data	data;
+	t_data	*data;
 
-	data.mlx = mlx_init();
-	data.win = mlx_new_window(data.mlx, WIDTH, HEIGHT, "Cub3D");
-	data.img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
-	data.addr = mlx_get_data_addr(data.img, &data.bpp, &data.line_length,
-			&data.endian);
-	init_walls(&data);
-	textures_init(&data);
-	data.posX = 4.5;
-	data.posY = 7.5;
-	data.dirX = 0;
-	data.dirY = -1;
-		// screen direction are opposite to math direction (FUN FACT)
-	data.planeX = -data.dirY * planeLen;
-	data.planeY = data.dirX * planeLen;
-	data.map1 = &map;
-	data.w = 0;
-	data.a = 0;
-	data.s = 0;
-	data.d = 0;
-	data.left = 0;
-	data.right = 0;
-	data.pitch = 0;
-	data.rotSpeed = 1 * (M_PI / 180);
-	hooks(&data);
-	mlx_loop_hook(data.mlx, render_next_frame, &data);
-	mlx_loop(data.mlx);
+	data = NULL;
+	if (argc == 2)
+		init_main(argv , data);
+	exit_fail("Pass a map with .cub extension");
+
 	return (0);
 }

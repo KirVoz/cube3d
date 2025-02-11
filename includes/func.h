@@ -1,6 +1,15 @@
 #ifndef FUNC_H
 # define FUNC_H
 
+typedef enum e_tex_type
+{
+	NO,
+	SO,
+	WE,
+	EA,
+	TEX_COUNT
+}				t_tex_type;
+
 typedef struct s_texture
 {
 	void		*img;
@@ -21,11 +30,13 @@ typedef struct s_data
 	int			bpp;
 	int			line_length;
 	int			endian;
-
 	double		pitch;
-	double posX, posY;
-	double dirX, dirY;
-	double planeX, planeY;
+	double		posX;
+	double		posY;
+	double		dirX;
+	double		dirY;
+	double		planeX;
+	double		planeY;
 
 	int (*map1)[MAP_HEIGHT][MAP_WIDTH];
 	int w, a, s, d;
@@ -105,4 +116,18 @@ void			draw_lines(t_data *data, t_viewer *v);
 
 void			textures_init(t_data *data);
 void			init_walls(t_data *data);
+
+void			init_main(char **argv, t_data *game);
+
+// utils
+void			exit_fail(char *exit_message);
+void			validation_error_msg(char *msg, char *var);
+void			full_print(char *str); // del
+// end of utils
+
+// memory managment
+void			*s_alloc(size_t count, size_t size);
+void			*s_realloc(void *ptr, size_t old_size, size_t new_size);
+void			*ft_realloc(void *ptr, size_t old_size, size_t new_size);
+
 #endif

@@ -5,10 +5,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <stdbool.h>
+#include <fcntl.h>
 #include "../libraries/libft/libft.h"
 #include "../libraries/Minilibx/mlx.h"
 #include "map.h"
 #include "func.h"
+#include "init.h"
 
 #define WIDTH 1600
 #define HEIGHT 800
