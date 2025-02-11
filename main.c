@@ -57,6 +57,8 @@ int	main(void)
 	data.img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
 	data.addr = mlx_get_data_addr(data.img, &data.bpp, &data.line_length,
 			&data.endian);
+	init_walls(&data);
+	textures_init(&data);
 	data.posX = 4.5;
 	data.posY = 7.5;
 	data.dirX = 0;

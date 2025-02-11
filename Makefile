@@ -16,6 +16,7 @@ SRC =	main.c \
 		$(SRC_PATH)/draw/draw_player.c \
 		$(SRC_PATH)/render/render_frames.c \
 		$(SRC_PATH)/render/render.c \
+		$(SRC_PATH)/init/textures.c \
 
 OSRC  = 	$(SRC:%.c=$(OBJ_DIR)/%.o)
 MLX   =		$(MLX_PATH)/libmlx.a

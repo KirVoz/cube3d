@@ -105,25 +105,27 @@ static void	line_height(t_ray *ray)
 		ray->drawEnd = HEIGHT - 1;
 }
 
-int	what_color(t_ray ray)
+static void	what_texture(t_texture **t, t_ray ray, t_data *data)
 {
-	int	color;
-
-	color = 0;
 	if (ray.hit_side == 'N')
-		color = 0xFF0000;
+		*t = &data->t[0];
 	else if (ray.hit_side == 'S')
-		color = 0x00FF00;
+		*t = &data->t[1];
 	else if (ray.hit_side == 'E')
-		color = 0x0000FF;
+		*t = &data->t[2];
 	else if (ray.hit_side == 'W')
-		color = 0xFF00FF;
-	return (color);
+		*t = &data->t[3];
 }
 
 void	draw_scene(t_data *data)
 {
-	t_ray	ray;
+	t_ray		ray;
+	t_texture	*t;
+	double		wallX;
+	int			texX;
+	int			d;
+	int			texY;
+	int			color;
 
 	ray.x = 0;
 	while (ray.x < SCENE_AREA_WIDTH)
@@ -133,11 +135,25 @@ void	draw_scene(t_data *data)
 		ray_hit(data, &ray);
 		perpWallDist(data, &ray);
 		line_height(&ray);
-		ray.color = what_color(ray);
+		what_texture(&t, ray, data);
+		if (ray.side == 0)
+			wallX = data->posY + ray.perpWallDist * ray.rayDirY;
+		else
+			wallX = data->posX + ray.perpWallDist * ray.rayDirX;
+		wallX -= floor(wallX);
+		texX = (int)(wallX * (double)(t->width));
+		if (ray.side == 0 && ray.rayDirX > 0)
+			texX = t->width - texX - 1;
+		if (ray.side == 1 && ray.rayDirY < 0)
+			texX = t->width - texX - 1;
 		ray.y = ray.drawStart;
 		while (ray.y < ray.drawEnd)
 		{
-			my_mlx_pixel_put(data, ray.x, ray.y, ray.color);
+			d = ray.y * 256 - HEIGHT * 128 + ray.lineHeight * 128;
+			texY = ((d * t->height) / ray.lineHeight) / 256;
+			color = *(int *)(t->addr + (texY * t->line_length + texX * (t->bpp
+							/ 8)));
+			my_mlx_pixel_put(data, ray.x, ray.y, color);
 			ray.y++;
 		}
 		ray.x++;
