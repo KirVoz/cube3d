@@ -32,8 +32,8 @@ void	draw_viewing_angle(t_data *data, int color)
 
 	v.color = color;
 	v.line_length = 200.0;
-	v.angle_step = M_PI / 180;
-	v.view_angle = M_PI / 3;
+	v.angle_step = PI / 180;
+	v.view_angle = PI / 3;
 	v.start_angle = atan2(data->dirY, data->dirX) - v.view_angle / 2;
 	v.angle = v.start_angle;
 	while (v.angle <= v.start_angle + v.view_angle)

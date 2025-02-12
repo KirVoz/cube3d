@@ -17,7 +17,7 @@ int	mouse_move(int x, int y, t_data *data)
 	double		oldDirX;
 	double		oldPlaneX;
 
-	sense = 0.05;
+	sense = 0.01;
 	rotSpeed = (x - prevX) * sense;
 	oldDirX = data->dirX;
 	data->dirX = data->dirX * cos(-rotSpeed) - data->dirY * sin(-rotSpeed);
