@@ -2,7 +2,7 @@
 
 static void	init_ray(t_data *data, t_ray *ray)
 {
-	ray->cameraX = 2 * ray->x / (double)SCENE_AREA_WIDTH - 1; // camera angle
+	ray->cameraX = 2 * ray->x / (double)WIDTH - 1; // camera angle
 	ray->rayDirX = data->dirX + data->planeX * ray->cameraX;  // ray directions
 	ray->rayDirY = data->dirY + data->planeY * ray->cameraX;
 	ray->mapX = (int)data->posX; // current map squares
@@ -128,7 +128,7 @@ void	draw_scene(t_data *data)
 	int			color;
 
 	ray.x = 0;
-	while (ray.x < SCENE_AREA_WIDTH)
+	while (ray.x < WIDTH)
 	{
 		init_ray(data, &ray);
 		init_ray2(data, &ray);

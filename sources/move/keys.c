@@ -15,9 +15,9 @@ int	key_press(int keycode, t_data *data)
 		data->keys->s = 1;
 	if (keycode == 2 || keycode == 100)
 		data->keys->d = 1;
-	if (keycode == 65363 || keycode == 123)
-		data->keys->right = 1;
 	if (keycode == 65361 || keycode == 124)
+		data->keys->right = 1;
+	if (keycode == 65363 || keycode == 123)
 		data->keys->left = 1;
 	return (0);
 }
@@ -32,9 +32,9 @@ int	key_release(int keycode, t_data *data)
 		data->keys->s = 0;
 	if (keycode == 2 || keycode == 100)
 		data->keys->d = 0;
-	if (keycode == 65363 || keycode == 123)
-		data->keys->right = 0;
 	if (keycode == 65361 || keycode == 124)
+		data->keys->right = 0;
+	if (keycode == 65363 || keycode == 123)
 		data->keys->left = 0;
 	return (0);
 }

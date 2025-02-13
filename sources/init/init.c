@@ -64,8 +64,8 @@ static void	hooks_init(t_data *data)
 	data->keys->d = 0;
 	data->keys->left = 0;
 	data->keys->right = 0;
-	data->keys->moveSpeed = 0.2;
-	data->mouse->rotSpeed = 2 * (PI / 180);
+	data->keys->moveSpeed = 0.05;
+	data->mouse->rotSpeed = 1.5 * (PI / 180);
 	data->pitch = 0;
 	hooks(data);
 }
