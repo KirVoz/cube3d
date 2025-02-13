@@ -37,7 +37,7 @@ INCLUDES = 	$(INC_PATH)/cub3d.h
 
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -I./includes #-g -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -g -I./includes -g -fsanitize=thread
 
 ifeq ($(shell uname),Darwin)
  MLX_PATH = $(LIB_PATH)/Minilibx

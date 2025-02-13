@@ -1,5 +1,8 @@
 #ifndef CUBE3D_H
 # define CUBE3D_H
+# ifndef __LINUX__
+# define LINUX 0
+#endif
 
 #include <stdio.h>
 #include <stdlib.h>

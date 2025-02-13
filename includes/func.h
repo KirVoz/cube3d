@@ -29,6 +29,7 @@ typedef struct s_keys
 	int			d;
 	int			left;
 	int			right;
+	double		moveSpeed;
 }				t_keys;
 
 typedef struct s_mouse
@@ -55,8 +56,6 @@ typedef struct s_data
 	double		dirY;
 	double		planeX;
 	double		planeY;
-	// int		MAP_WIDTH;
-	// int		MAP_HEIGHT;
 
 	int			**map1;
 	size_t		map_height;
@@ -136,15 +135,12 @@ void			hooks(t_data *data);
 void			draw_viewing_angle(t_data *data, int color);
 void			draw_lines(t_data *data, t_viewer *v);
 
-void			textures_init_temp(t_data *data);
-void			init_walls(t_data *data);
-
 void			init_main(char **argv, t_data *game);
 
 // utils
 void			exit_fail(char *exit_message);
 void			validation_error_msg(char *msg, char *var);
-void	full_print(char *str); // del
+void			full_print(char *str); // del
 // end of utils
 
 // memory managment

@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 04:44:08 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/13 06:10:34 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/13 18:58:26 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,26 +67,26 @@ void	map_structure_check(t_val *val)
 	}
 }
 
-static void	set_second_starting_position(t_val *val, size_t i)
+static void	set_x_starting_position(t_val *val, size_t i)
 {
 	if (ft_strchr(val->mapv[i], 'N'))
 	{
-		val->starting_pos[1] = (ft_strchr(val->mapv[i], 'N') - val->mapv[i]);
+		val->starting_pos[0] = (ft_strchr(val->mapv[i], 'N') - val->mapv[i]);
 		val->direction = 'N';
 	}
 	else if (ft_strchr(val->mapv[i], 'S'))
 	{
-		val->starting_pos[1] = (ft_strchr(val->mapv[i], 'S') - val->mapv[i]);
+		val->starting_pos[0] = (ft_strchr(val->mapv[i], 'S') - val->mapv[i]);
 		val->direction = 'S';
 	}
 	else if (ft_strchr(val->mapv[i], 'W'))
 	{
-		val->starting_pos[1] = (ft_strchr(val->mapv[i], 'W') - val->mapv[i]);
+		val->starting_pos[0] = (ft_strchr(val->mapv[i], 'W') - val->mapv[i]);
 		val->direction = 'W';
 	}
 	else if (ft_strchr(val->mapv[i], 'E'))
 	{
-		val->starting_pos[1] = (ft_strchr(val->mapv[i], 'E') - val->mapv[i]);
+		val->starting_pos[0] = (ft_strchr(val->mapv[i], 'E') - val->mapv[i]);
 		val->direction = 'E';
 	}
 }
@@ -104,12 +104,14 @@ void	starting_position_check(t_val *val)
 			|| ft_strchr(val->mapv[i], 'W') || ft_strchr(val->mapv[i], 'E'))
 		{
 			counter++;
-			val->starting_pos[0] = i;
-			set_second_starting_position(val, i);
+			set_x_starting_position(val, i);
+			val->starting_pos[1] = i;
 		}
 		if (counter > 1)
 			validation_error_msg("You can set only one "
 				"player on the map", NULL);
 		i++;
 	}
+	val->starting_pos[0] += 0.5;
+	val->starting_pos[1] -= val->indetifier_last_i + 0.5;
 }

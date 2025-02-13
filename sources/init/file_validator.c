@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 04:40:59 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/12 05:01:49 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:29:44 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	open_map_validation(char *map_path)
 
 	fd = open(map_path, O_RDONLY);
 	if (fd == -1)
-	exit_fail("Unable to open a map file");
+		exit_fail("Unable to open a map file");
 	return (fd);
 }
 

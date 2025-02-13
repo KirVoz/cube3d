@@ -15,7 +15,7 @@ int	mouse_move(int x, int y, t_data *data)
 
 	prevX = WIDTH / 2;
 	prevY = HEIGHT / 2;
-	data->mouse->sense = 0.05;
+	data->mouse->sense = 0.01;
 	data->mouse->rotSpeed = (x - prevX) * data->mouse->sense;
 	data->mouse->oldDirX = data->dirX;
 	data->dirX = data->dirX * cos(-data->mouse->rotSpeed) - data->dirY
@@ -46,7 +46,8 @@ void	hooks(t_data *data)
 	mlx_hook(data->win, 2, 1L << 0, key_press, data);
 	mlx_hook(data->win, 3, 1L << 1, key_release, data);
 	mlx_hook(data->win, 17, 1L << 17, close_cub, data);
-	// mlx_hook(data->win, 6, 1L<<6, mouse_move, data); // macos
+	if (!LINUX)
+		mlx_hook(data->win, 6, 1L<<6, mouse_move, data);
 }
 
 int	main(int argc, char **argv)

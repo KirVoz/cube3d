@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 19:18:56 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/13 06:08:56 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/13 18:53:24 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define INIT_H
 
 # include "cub3d.h"
+
+typedef enum e_colour_type
+{
+	C,
+	F,
+	COLOURS_COUNT
+}			t_col_type;
 
 typedef struct s_texture_validation
 {
@@ -31,13 +38,6 @@ typedef struct s_colour_validation
 
 }			t_col_val;
 
-typedef enum e_colour_type
-{
-	C,
-	F,
-	COLOURS_COUNT
-}			t_col_type;
-
 typedef struct s_validation
 {
 	int			fd;
@@ -50,11 +50,10 @@ typedef struct s_validation
 	char		*colours_name[2];
 	size_t		indetifier_last_i;
 	size_t		map_first_i;
-	size_t		starting_pos[2];
+	double		starting_pos[2];
 	char		direction;
 }				t_val;
  
-
 // init
 void		parser_main(t_val *val, char **argv);
 void		textures_init(t_data *data, t_val *val);
