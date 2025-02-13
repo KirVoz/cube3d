@@ -38,7 +38,10 @@ typedef struct s_data
 	double		planeX;
 	double		planeY;
 
-	int (*map1)[MAP_HEIGHT][MAP_WIDTH];
+	int			**map1;
+	size_t		map_height;
+	size_t		map_width;
+
 	int w, a, s, d;
 	int left, right;
 	double sense, rotSpeed, oldDirX, oldPlaneX;

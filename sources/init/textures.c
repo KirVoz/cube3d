@@ -6,12 +6,13 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 04:53:01 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/12 05:32:03 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/12 18:11:00 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+//del
 void	init_walls(t_data *data)
 {
 	data->wall = malloc(sizeof(char *) * 4);

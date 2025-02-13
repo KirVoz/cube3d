@@ -76,7 +76,7 @@ clean:
 
 fclean: clean
 	@rm -rf $(NAME)
-	make fclean -C $(LFT_PATH)
+	@make fclean -C $(LFT_PATH)
 	@echo "Executable and libraries cleaned"
 
 re: fclean all

@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 19:18:56 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/12 05:16:24 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/13 06:08:56 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef enum e_colour_type
 typedef struct s_validation
 {
 	int			fd;
-	char		**map_v;
+	char		**mapv;
 	t_tex_val	textures[TEX_COUNT];
 	t_tex_type	tex_type;
 	char		*tex_name[4];
@@ -51,6 +51,7 @@ typedef struct s_validation
 	size_t		indetifier_last_i;
 	size_t		map_first_i;
 	size_t		starting_pos[2];
+	char		direction;
 }				t_val;
  
 

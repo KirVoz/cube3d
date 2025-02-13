@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:15:05 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/12 05:17:24 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/12 18:33:51 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	init_names(t_val *val)
 static void	val_init(t_val *val)
 {
 	val->fd = 0;
-	val->map_v = NULL;
+	val->mapv = NULL;
 	while (val->tex_type < TEX_COUNT)
 	{
 		val->textures[val->tex_type].counter = 0;
@@ -79,7 +79,7 @@ void	parser_main(t_val *val, char **argv)
 	val_init(val);
 	extension_validation(argv[1]);
 	val->fd = open_map_validation(argv[1]);
-	val->map_v = read_map(val->fd);
+	val->mapv = read_map(val->fd);
 	close(val->fd);
 	map_validation(val);
 	printf("\nSuccessful parsing and validation 🎉\n\n"); //del

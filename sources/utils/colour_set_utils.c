@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 04:47:44 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/12 05:16:24 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/12 18:33:51 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static void	validate_commas(t_val *val)
 	char	*comma;
 
 	i = 0;
-	while (val->map_v[i])
+	while (val->mapv[i])
 	{
-		comma = ft_strchr(val->map_v[i], ',');
+		comma = ft_strchr(val->mapv[i], ',');
 		if (comma && *(comma + 1) == ',')
 			validation_error_msg("Colours should be separated "
 				"by only 1 comma", NULL);
@@ -37,7 +37,7 @@ static char	**colour_split(t_val *val, size_t ind)
 
 	i = 0;
 	j = 2;
-	res = ft_split(&val->map_v[ind][j], ',');
+	res = ft_split(&val->mapv[ind][j], ',');
 	if (!res)
 		exit_fail("Memory allocation in colour_set failed");
 	while (res[i])
@@ -104,10 +104,10 @@ void	colour_set(t_val *val, t_col_type col_type, size_t ind)
 
 // 	i = 0;
 // 	j = 2;
-// 	while (val->map_v[i])
+// 	while (val->mapv[i])
 // 	{
 // 		char	*comma;
-// 		comma = ft_strchr(val->map_v[i], ',');
+// 		comma = ft_strchr(val->mapv[i], ',');
 // 		if (comma && *(comma + 1) == ',')
 // 			validation_error_msg("Colours should be "
 				// "separated by only 1 comma", NULL);
@@ -115,7 +115,7 @@ void	colour_set(t_val *val, t_col_type col_type, size_t ind)
 // 	}
 
 // 	i = 0;
-// 	res = ft_split(&val->map_v[ind][j], ',');
+// 	res = ft_split(&val->mapv[ind][j], ',');
 // 	if (!res)
 // 		exit_fail("Memory allocation in colour_set failed");
 
