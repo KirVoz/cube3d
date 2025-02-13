@@ -54,6 +54,7 @@ int	main(int argc, char **argv)
 	t_data	*data;
 
 	data = NULL;
+	printf("MAIN\n");
 	if (argc == 2)
 		init_main(argv, data);
 	exit_fail("Pass a map with .cub extension");

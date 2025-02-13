@@ -18,8 +18,8 @@
 #define TILE_SIZE 8
 #define SCENE_AREA_WIDTH WIDTH
 #define SCENE_AREA_HEIGHT HEIGHT
-#define M_PI 3.14159265358979323846
+#define PI 3.14159265358979323846
 #define FOV 60.0
-#define planeLen (FOV /2 * M_PI / 180)
+#define planeLen (FOV /2 * PI / 180)
 
 #endif

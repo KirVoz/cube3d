@@ -76,7 +76,7 @@ static void	ray_hit(t_data *data, t_ray *ray)
 			ray->mapY += ray->stepY;
 			ray->side = 1;
 		}
-		if ((*data->map1)[ray->mapY][ray->mapX] > 0)
+		if (data->map1[ray->mapY][ray->mapX] > 0)
 		{
 			ray->hit = 1;
 			what_side(ray);

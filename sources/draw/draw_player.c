@@ -31,9 +31,9 @@ void	draw_viewing_angle(t_data *data, int color)
 	t_viewer	v;
 
 	v.color = color;
-	v.line_length = 200.0;
-	v.angle_step = M_PI / 180;
-	v.view_angle = M_PI / 3;
+	v.line_length = 20;
+	v.angle_step = PI / 180;
+	v.view_angle = PI / 3;
 	v.start_angle = atan2(data->dirY, data->dirX) - v.view_angle / 2;
 	v.angle = v.start_angle;
 	while (v.angle <= v.start_angle + v.view_angle)
@@ -72,7 +72,7 @@ void	draw_lines(t_data *data, t_viewer *v)
 	{
 		if (v->x0 >= 0 && v->x0 < WIDTH && v->y0 >= 0 && v->y0 < HEIGHT)
 		{
-			if ((*data->map1)[v->y0 / TILE_SIZE][v->x0 / TILE_SIZE] == 1)
+			if (data->map1[v->y0 / TILE_SIZE][v->x0 / TILE_SIZE] == 1)
 				break ;
 			my_mlx_pixel_put(data, v->x0, v->y0, v->color);
 		}

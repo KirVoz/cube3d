@@ -7,9 +7,9 @@ void	move_forward(t_data *data, double moveSpeed)
 
 	newPosX = data->posX + data->dirX * moveSpeed;
 	newPosY = data->posY + data->dirY * moveSpeed;
-	if (newPosX >= 0 && newPosX < MAP_WIDTH && newPosY >= 0
-		&& newPosY < MAP_HEIGHT
-		&& (*data->map1)[(int)newPosY][(int)newPosX] == 0)
+	if (newPosX >= 0 && newPosX < data->map_width && newPosY >= 0
+		&& newPosY < data->map_height
+		&& data->map1[(int)newPosY][(int)newPosX] == 0)
 	{
 		data->posX = newPosX;
 		data->posY = newPosY;
@@ -23,9 +23,9 @@ void	move_backward(t_data *data, double moveSpeed)
 
 	newPosX = data->posX - data->dirX * moveSpeed;
 	newPosY = data->posY - data->dirY * moveSpeed;
-	if (newPosX >= 0 && newPosX < MAP_WIDTH && newPosY >= 0
-		&& newPosY < MAP_HEIGHT
-		&& (*data->map1)[(int)newPosY][(int)newPosX] == 0)
+	if (newPosX >= 0 && newPosX < data->map_width && newPosY >= 0
+		&& newPosY < data->map_height
+		&& data->map1[(int)newPosY][(int)newPosX] == 0)
 	{
 		data->posX = newPosX;
 		data->posY = newPosY;
@@ -39,9 +39,9 @@ void	move_left(t_data *data, double moveSpeed)
 
 	newPosX = data->posX - data->planeX * moveSpeed;
 	newPosY = data->posY - data->planeY * moveSpeed;
-	if (newPosX >= 0 && newPosX < MAP_WIDTH && newPosY >= 0
-		&& newPosY < MAP_HEIGHT
-		&& (*data->map1)[(int)newPosY][(int)newPosX] == 0)
+	if (newPosX >= 0 && newPosX < data->map_width && newPosY >= 0
+		&& newPosY < data->map_height
+		&& data->map1[(int)newPosY][(int)newPosX] == 0)
 	{
 		data->posX = newPosX;
 		data->posY = newPosY;
@@ -55,9 +55,9 @@ void	move_right(t_data *data, double moveSpeed)
 
 	newPosX = data->posX + data->planeX * moveSpeed;
 	newPosY = data->posY + data->planeY * moveSpeed;
-	if (newPosX >= 0 && newPosX < MAP_WIDTH && newPosY >= 0
-		&& newPosY < MAP_HEIGHT
-		&& (*data->map1)[(int)newPosY][(int)newPosX] == 0)
+	if (newPosX >= 0 && newPosX < data->map_width && newPosY >= 0
+		&& newPosY < data->map_height
+		&& data->map1[(int)newPosY][(int)newPosX] == 0)
 	{
 		data->posX = newPosX;
 		data->posY = newPosY;

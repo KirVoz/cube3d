@@ -58,7 +58,10 @@ typedef struct s_data
 	// int		MAP_WIDTH;
 	// int		MAP_HEIGHT;
 
-	int			(*map1)[MAP_HEIGHT][MAP_WIDTH];
+	int			**map1;
+	size_t		map_height;
+	size_t		map_width;
+
 	char		**wall;
 	t_keys		*keys;
 	t_mouse		*mouse;
@@ -133,7 +136,7 @@ void			hooks(t_data *data);
 void			draw_viewing_angle(t_data *data, int color);
 void			draw_lines(t_data *data, t_viewer *v);
 
-void			textures_init(t_data *data);
+void			textures_init_temp(t_data *data);
 void			init_walls(t_data *data);
 
 void			init_main(char **argv, t_data *game);

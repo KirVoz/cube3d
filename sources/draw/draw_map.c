@@ -11,9 +11,10 @@ static void	draw_tile_border(t_data *data, int x, int y)
 		j = -1;
 		while (++j < TILE_SIZE)
 		{
-			if (i == 0 || j == 0 || i == TILE_SIZE - 0.5 || j == TILE_SIZE - 0.5)
+			if (i == 0 || j == 0 || i == TILE_SIZE - 0.5 || j == TILE_SIZE
+				- 0.5)
 				my_mlx_pixel_put(data, x * TILE_SIZE + j, y * TILE_SIZE + i,
-					0xFF0000);
+					0x000000);
 		}
 	}
 }
@@ -39,15 +40,15 @@ void	draw_map(t_data *data)
 	int	color;
 
 	y = 0;
-	while (y < MAP_HEIGHT)
+	while (y < (int)data->map_height)
 	{
 		x = 0;
-		while (x < MAP_WIDTH)
+		while (x < (int)data->map_width)
 		{
-			if ((*data->map1)[y][x] == 1)
+			if (data->map1[y][x] == 1)
 				color = 0xFFFFFF;
 			draw_tile_border(data, x, y);
-			if ((*data->map1)[y][x] == 1)
+			if (data->map1[y][x] == 1)
 				draw_tile(data, x, y, color);
 			x++;
 		}
@@ -97,10 +98,10 @@ void	fill_map(t_data *data, int color)
 	int	y;
 
 	x = 0;
-	while (x < MAP_WIDTH * TILE_SIZE)
+	while (x < (int)data->map_width * TILE_SIZE)
 	{
 		y = 0;
-		while (y < MAP_HEIGHT * TILE_SIZE)
+		while (y < (int)data->map_height * TILE_SIZE)
 		{
 			my_mlx_pixel_put(data, x, y, color);
 			y++;

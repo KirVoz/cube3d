@@ -22,9 +22,13 @@ SRC =	main.c \
 		$(INI_PATH)/init.c \
 		$(INI_PATH)/parser.c \
 		$(INI_PATH)/validator.c \
-		$(INI_PATH)/validator2.c \
+		$(INI_PATH)/file_validator.c \
+		$(INI_PATH)/identifier_validator.c \
+		$(INI_PATH)/map_validator.c \
 		$(MEM_PATH)/allocator.c \
-		$(UTL_PATH)/general_utils.c
+		$(UTL_PATH)/general_utils.c \
+		$(UTL_PATH)/texture_set_utils.c \
+		$(UTL_PATH)/colour_set_utils.c
 
 OSRC  = 	$(SRC:%.c=$(OBJ_DIR)/%.o)
 MLX   =		$(MLX_PATH)/libmlx.a
@@ -72,7 +76,7 @@ clean:
 
 fclean: clean
 	@rm -rf $(NAME)
-	make fclean -C $(LFT_PATH)
+	@make fclean -C $(LFT_PATH)
 	@echo "Executable and libraries cleaned"
 
 re: fclean all

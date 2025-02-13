@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validator2.c                                       :+:      :+:    :+:   */
+/*   file_validator.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 03:44:37 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/11 02:26:08 by aaleksee         ###   ########.fr       */
+/*   Created: 2025/02/12 04:40:59 by aaleksee          #+#    #+#             */
+/*   Updated: 2025/02/12 05:01:49 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "init.h"
 
 void	extension_validation(char *map_path)
 {
@@ -29,6 +29,23 @@ int	open_map_validation(char *map_path)
 
 	fd = open(map_path, O_RDONLY);
 	if (fd == -1)
-		exit_fail("Unable to open a map file");
+	exit_fail("Unable to open a map file");
 	return (fd);
+}
+
+void	texture_open_check(t_val *val)
+{
+	size_t	i;
+	int		fd;
+
+	i = 0;
+	while (i < TEX_COUNT)
+	{
+		fd = open(val->textures[i].path, O_RDONLY);
+		if (fd == -1)
+			validation_error_msg("Unable to open "
+				"texture file for the ", val->tex_name[i]);
+		close(fd);
+		i++;
+	}
 }
