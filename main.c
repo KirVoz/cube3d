@@ -10,22 +10,23 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 int	mouse_move(int x, int y, t_data *data)
 {
-	int	prevX = WIDTH / 2;
-	int	prevY = HEIGHT / 2;
-	double		sense;
-	double		rotSpeed;
-	double		oldDirX;
-	double		oldPlaneX;
+	int	prevX;
+	int	prevY;
 
-	sense = 0.05;
-	rotSpeed = (x - prevX) * sense;
-	oldDirX = data->dirX;
-	data->dirX = data->dirX * cos(-rotSpeed) - data->dirY * sin(-rotSpeed);
-	data->dirY = oldDirX * sin(-rotSpeed) + data->dirY * cos(-rotSpeed);
-	oldPlaneX = data->planeX;
-	data->planeX = data->planeX * cos(-rotSpeed) - data->planeY
-		* sin(-rotSpeed);
-	data->planeY = oldPlaneX * sin(-rotSpeed) + data->planeY * cos(-rotSpeed);
+	prevX = WIDTH / 2;
+	prevY = HEIGHT / 2;
+	data->mouse->sense = 0.05;
+	data->mouse->rotSpeed = (x - prevX) * data->mouse->sense;
+	data->mouse->oldDirX = data->dirX;
+	data->dirX = data->dirX * cos(-data->mouse->rotSpeed) - data->dirY
+		* sin(-data->mouse->rotSpeed);
+	data->dirY = data->mouse->oldDirX * sin(-data->mouse->rotSpeed) + data->dirY
+		* cos(-data->mouse->rotSpeed);
+	data->mouse->oldPlaneX = data->planeX;
+	data->planeX = data->planeX * cos(-data->mouse->rotSpeed) - data->planeY
+		* sin(-data->mouse->rotSpeed);
+	data->planeY = data->mouse->oldPlaneX * sin(-data->mouse->rotSpeed)
+		+ data->planeY * cos(-data->mouse->rotSpeed);
 	data->pitch = y - prevY;
 	mlx_mouse_move(data->win, WIDTH / 2, HEIGHT / 2);
 	prevX = WIDTH / 2;
@@ -54,8 +55,7 @@ int	main(int argc, char **argv)
 
 	data = NULL;
 	if (argc == 2)
-		init_main(argv , data);
+		init_main(argv, data);
 	exit_fail("Pass a map with .cub extension");
-
 	return (0);
 }

@@ -68,10 +68,10 @@ void	parser_main(char **argv, t_data *data)
 	val->fd = open_map_validation(argv[1]);
 	val->map = read_map(val->fd);
 	fix_map(val->map);
+	//exit (0);
 	close(val->fd);
-	(void)map;
 	map_validation(val);
-	// map_parser(map, game);
+	// map_parser(map, data);
 }
 
 char	**read_map(int fd)
@@ -95,7 +95,7 @@ char	**read_map(int fd)
 		}
 	}
 	temp_map[++i] = NULL;
-	ft_realloc(temp_map, size, i);
+	temp_map = s_realloc(temp_map, size, i);
 	return (temp_map);
 }
 

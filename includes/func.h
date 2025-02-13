@@ -21,6 +21,24 @@ typedef struct s_texture
 	int			endian;
 }				t_texture;
 
+typedef struct s_keys
+{
+	int			w;
+	int			a;
+	int			s;
+	int			d;
+	int			left;
+	int			right;
+}				t_keys;
+
+typedef struct s_mouse
+{
+	double		sense;
+	double		rotSpeed;
+	double		oldDirX;
+	double		oldPlaneX;
+}				t_mouse;
+
 typedef struct s_data
 {
 	void		*mlx;
@@ -37,12 +55,13 @@ typedef struct s_data
 	double		dirY;
 	double		planeX;
 	double		planeY;
+	// int		MAP_WIDTH;
+	// int		MAP_HEIGHT;
 
-	int (*map1)[MAP_HEIGHT][MAP_WIDTH];
-	int w, a, s, d;
-	int left, right;
-	double sense, rotSpeed, oldDirX, oldPlaneX;
+	int			(*map1)[MAP_HEIGHT][MAP_WIDTH];
 	char		**wall;
+	t_keys		*keys;
+	t_mouse		*mouse;
 	t_texture	t[4];
 }				t_data;
 
@@ -80,12 +99,12 @@ typedef struct s_viewer
 	int			end_x;
 	int			end_y;
 	float		line_length;
-	int			dx;
-	int			dy;
-	int			sx;
-	int			sy;
+	int			delta_x;
+	int			delta_y;
+	int			side_x;
+	int			side_y;
 	int			err;
-	int			e2;
+	int			err_tmp;
 	int			color;
 	int			x0;
 	int			y0;
@@ -122,7 +141,7 @@ void			init_main(char **argv, t_data *game);
 // utils
 void			exit_fail(char *exit_message);
 void			validation_error_msg(char *msg, char *var);
-void			full_print(char *str); // del
+void	full_print(char *str); // del
 // end of utils
 
 // memory managment

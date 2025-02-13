@@ -49,20 +49,20 @@ static void	validate_v(t_data *data, t_viewer *v)
 {
 	v->x0 = (int)(data->posX * TILE_SIZE);
 	v->y0 = (int)(data->posY * TILE_SIZE);
-	v->dx = abs(v->end_x - v->x0);
-	v->dy = abs(v->end_y - v->y0);
+	v->delta_x = abs(v->end_x - v->x0);
+	v->delta_y = abs(v->end_y - v->y0);
 	if (v->x0 < v->end_x)
-		v->sx = 1;
+		v->side_x = 1;
 	else
-		v->sx = -1;
+		v->side_x = -1;
 	if (v->y0 < v->end_y)
-		v->sy = 1;
+		v->side_y = 1;
 	else
-		v->sy = -1;
-	if (v->dx > v->dy)
-		v->err = v->dx / 2;
+		v->side_y = -1;
+	if (v->delta_x > v->delta_y)
+		v->err = v->delta_x / 2;
 	else
-		v->err = -v->dy / 2;
+		v->err = -v->delta_y / 2;
 }
 
 void	draw_lines(t_data *data, t_viewer *v)
@@ -78,16 +78,16 @@ void	draw_lines(t_data *data, t_viewer *v)
 		}
 		if (v->x0 == v->end_x && v->y0 == v->end_y)
 			break ;
-		v->e2 = v->err;
-		if (v->e2 > -v->dx)
+		v->err_tmp = v->err;
+		if (v->err_tmp > -v->delta_x)
 		{
-			v->err -= v->dy;
-			v->x0 += v->sx;
+			v->err -= v->delta_y;
+			v->x0 += v->side_x;
 		}
-		if (v->e2 < v->dy)
+		if (v->err_tmp < v->delta_y)
 		{
-			v->err += v->dx;
-			v->y0 += v->sy;
+			v->err += v->delta_x;
+			v->y0 += v->side_y;
 		}
 	}
 }
