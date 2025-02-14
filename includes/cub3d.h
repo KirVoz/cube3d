@@ -16,12 +16,14 @@
 #include "func.h"
 #include "init.h"
 
-#define WIDTH 1600
-#define HEIGHT 800
-#define TILE_SIZE 10
-#define MINIMAP_SIZE 10
-#define PI 3.14159265358979323846
-#define FOV 60.0
-#define planeLen (FOV / 2 * PI / 180)
+# define WIDTH 1600
+# define HEIGHT 800
+# define TILE_SIZE 10
+# define MINIMAP_SIZE_w 10
+# define MINIMAP_SIZE_h 10
+# define WALL_BUF 0.1
+# define PI 3.14159265358979323846
+# define FOV 60.0
+# define planeLen (FOV / 2 * PI / 180)
 
 #endif

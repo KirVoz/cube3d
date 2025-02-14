@@ -106,7 +106,7 @@ typedef struct s_viewer
 	int			side_x;
 	int			side_y;
 	int			err;
-	int			err_tmp;
+	int			step_err;
 	int			color;
 	int			x0;
 	int			y0;
@@ -115,8 +115,8 @@ typedef struct s_viewer
 int				key_press(int keycode, t_data *data);
 int				key_release(int keycode, t_data *data);
 void			move_player(t_data *data);
-void			rotate_right(t_data *data, double rotSpeed);
-void			rotate_left(t_data *data, double rotSpeed);
+void			rotate_left_right(t_data *data, double rotSpeed);
+int				check_collision(t_data *data, double newPosX, double newPosY);
 
 void			draw_map(t_data *data);
 void			draw_scene(t_data *data);
@@ -140,7 +140,7 @@ void			init_main(char **argv, t_data *game);
 // utils
 void			exit_fail(char *exit_message);
 void			validation_error_msg(char *msg, char *var);
-void			full_print(char *str); // del
+void	full_print(char *str); // del
 // end of utils
 
 // memory managment

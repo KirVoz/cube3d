@@ -4,7 +4,7 @@ static void	draw_minimap(t_data *data)
 {
 	fill_map(data, 0x000000);
 	draw_map(data);
-	print_player(data, 0x00FF00);
+	print_player(data, 0xFFFF00);
 	draw_viewing_angle(data, 0x888888);
 }
 
