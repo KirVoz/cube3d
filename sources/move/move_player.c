@@ -1,4 +1,4 @@
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
 void	move_forward(t_data *data, double moveSpeed)
 {

@@ -6,11 +6,11 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 16:44:16 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/15 14:41:52 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/15 15:26:14 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "init.h"
 
 bool	check_map_borders(char **map);
 	// free val->texture[all]->path, **mapv, 
@@ -55,9 +55,9 @@ static size_t	is_border(char **map, size_t total_rows, size_t i, size_t j)
 		return (1);
 	if (is_out_of_bounds(i + 1, j, total_rows, map) || map[i + 1][j] == ' ')
 		return (1);
-	if (j == 0 || map[i][j - 1] == ' ')
-		return (1);
 	if (is_out_of_bounds(i, j + 1, total_rows, map) || map[i][j + 1] == ' ')
+		return (1);
+	if (j == 0 || map[i][j - 1] == ' ')
 		return (1);
 	return (0);
 }

@@ -6,11 +6,11 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 03:44:37 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/15 14:55:14 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/15 15:24:51 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "init.h"
 
 static char	*skip_whitespaces(char *mapv)
 {

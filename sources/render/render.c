@@ -1,4 +1,4 @@
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
 static void	init_ray(t_data *data, t_ray *ray)
 {

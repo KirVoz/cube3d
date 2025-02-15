@@ -1,15 +1,6 @@
 #ifndef FUNC_H
 # define FUNC_H
 
-typedef enum e_tex_type
-{
-	NO,
-	SO,
-	WE,
-	EA,
-	TEX_COUNT
-}				t_tex_type;
-
 typedef struct s_texture
 {
 	void		*img;

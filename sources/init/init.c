@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:49:43 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/15 15:09:38 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/15 15:27:48 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	data_init(t_val *val, t_data *data)
 	textures_init(data, val);
 	position_init(data, val);
 	map_init(data, val);
-	print_int_map(data); //del
+	// print_int_map(data); //del
 	hooks_init(data);
 	mlx_loop_hook(data->mlx, render_next_frame, data);
 	mlx_loop(data->mlx);

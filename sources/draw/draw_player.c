@@ -1,4 +1,4 @@
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
 void	print_player(t_data *data, int color)
 {
@@ -13,8 +13,8 @@ void	print_player(t_data *data, int color)
 		y = -player / 2;
 		while (y < player / 2)
 		{
-			my_mlx_pixel_put(data, (MINIMAP_SIZE_w / 2) * TILE_SIZE + x
-				+ TILE_SIZE / 2, (MINIMAP_SIZE_h / 2) * TILE_SIZE + y
+			my_mlx_pixel_put(data, (MINIMAP_SIZE_W / 2) * TILE_SIZE + x
+				+ TILE_SIZE / 2, (MINIMAP_SIZE_H / 2) * TILE_SIZE + y
 				+ TILE_SIZE / 2, color);
 			y++;
 		}
@@ -35,9 +35,9 @@ void	draw_viewing_angle(t_data *data, int color)
 	v.angle = v.start_angle;
 	while (v.angle <= v.start_angle + v.view_angle)
 	{
-		v.end_x = (int)((MINIMAP_SIZE_w / 2) * TILE_SIZE + v.line_length
+		v.end_x = (int)((MINIMAP_SIZE_W / 2) * TILE_SIZE + v.line_length
 				* cos(v.angle) + TILE_SIZE / 2);
-		v.end_y = (int)((MINIMAP_SIZE_h / 2) * TILE_SIZE + v.line_length
+		v.end_y = (int)((MINIMAP_SIZE_H / 2) * TILE_SIZE + v.line_length
 				* sin(v.angle) + TILE_SIZE / 2);
 		draw_lines(data, &v);
 		v.angle += v.angle_step;
@@ -47,8 +47,8 @@ void	draw_viewing_angle(t_data *data, int color)
 static void	validate_v(t_data *data, t_viewer *v)
 {
 	(void)data;
-	v->x0 = (int)(((MINIMAP_SIZE_w) / 2) * TILE_SIZE + TILE_SIZE / 2);
-	v->y0 = (int)(((MINIMAP_SIZE_h) / 2) * TILE_SIZE + TILE_SIZE / 2);
+	v->x0 = (int)(((MINIMAP_SIZE_W) / 2) * TILE_SIZE + TILE_SIZE / 2);
+	v->y0 = (int)(((MINIMAP_SIZE_H) / 2) * TILE_SIZE + TILE_SIZE / 2);
 	v->delta_x = abs(v->end_x - v->x0);
 	v->delta_y = abs(v->end_y - v->y0);
 	if (v->x0 < v->end_x)
@@ -72,8 +72,8 @@ void	draw_lines(t_data *data, t_viewer *v)
 	{
 		if (v->x0 >= 0 && v->x0 < WIDTH && v->y0 >= 0 && v->y0 < HEIGHT)
 		{
-			if (data->map1[(int)(data->posY - MINIMAP_SIZE_h / 2 + v->y0
-					/ TILE_SIZE)][(int)(data->posX - MINIMAP_SIZE_w / 2 + v->x0
+			if (data->map1[(int)(data->posY - MINIMAP_SIZE_H / 2 + v->y0
+					/ TILE_SIZE)][(int)(data->posX - MINIMAP_SIZE_W / 2 + v->x0
 					/ TILE_SIZE)] == 1)
 				break ;
 			my_mlx_pixel_put(data, v->x0, v->y0, v->color);

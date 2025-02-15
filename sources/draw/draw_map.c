@@ -1,4 +1,4 @@
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
 static void	draw_tile_border(t_data *data, int x, int y)
 {
@@ -66,10 +66,10 @@ void	draw_map(t_data *data)
     int	end_x;
     int	end_y;
 
-    start_x = (int)data->posX - MINIMAP_SIZE_w / 2;
-    start_y = (int)data->posY - MINIMAP_SIZE_h / 2;
-    end_x = start_x + MINIMAP_SIZE_w;
-    end_y = start_y + MINIMAP_SIZE_h;
+    start_x = (int)data->posX - MINIMAP_SIZE_W / 2;
+    start_y = (int)data->posY - MINIMAP_SIZE_H / 2;
+    end_x = start_x + MINIMAP_SIZE_W;
+    end_y = start_y + MINIMAP_SIZE_H;
 
     y = start_y;
     while (y < end_y)
@@ -133,10 +133,10 @@ void	fill_map(t_data *data, int color)
 	int	y;
 
 	x = 0;
-	while (x < MINIMAP_SIZE_w * TILE_SIZE)
+	while (x < MINIMAP_SIZE_W * TILE_SIZE)
 	{
 		y = 0;
-		while (y < MINIMAP_SIZE_h * TILE_SIZE)
+		while (y < MINIMAP_SIZE_H * TILE_SIZE)
 		{
 			my_mlx_pixel_put(data, x, y, color);
 			y++;

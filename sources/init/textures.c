@@ -6,11 +6,11 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 04:53:01 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/13 17:31:34 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/15 15:24:24 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "init.h"
 
 void	textures_init(t_data *data, t_val *val)
 {

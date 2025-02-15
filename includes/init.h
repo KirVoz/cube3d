@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 19:18:56 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/14 23:36:19 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/15 15:28:56 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 # define INIT_H
 
 # include "cub3d.h"
+
+typedef enum e_tex_type
+{
+	NO,
+	SO,
+	WE,
+	EA,
+	TEX_COUNT
+}			t_tex_type;
 
 typedef enum e_colour_type
 {
@@ -53,7 +62,7 @@ typedef struct s_validation
 	double		starting_pos[2];
 	char		direction;
 }				t_val;
- 
+
 // init
 void		parser_main(t_val *val, char **argv);
 void		textures_init(t_data *data, t_val *val);
@@ -71,10 +80,8 @@ void		missing_indetifiers_check(t_val *val);
 void		map_structure_check(t_val *val);
 void		starting_position_check(t_val *val);
 
-void		map_validity_check(t_val *val);
-
 // utils
 void		texture_set(t_val *val, t_tex_type col_type, size_t ind);
 void		colour_set(t_val *val, t_col_type col_type, size_t ind);
 
-# endif
+#endif

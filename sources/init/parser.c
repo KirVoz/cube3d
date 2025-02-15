@@ -6,11 +6,11 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:15:05 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/14 23:49:42 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/15 15:24:35 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "init.h"
 
 static void	init_names(t_val *val)
 {
