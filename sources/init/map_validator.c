@@ -5,140 +5,83 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/12 04:44:08 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/15 15:09:59 by aaleksee         ###   ########.fr       */
+/*   Created: 2025/02/04 16:44:16 by aaleksee          #+#    #+#             */
+/*   Updated: 2025/02/15 16:59:11 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "init.h"
 
-static bool	is_valid_map_line(char *line)
-{
-	size_t	j;
+bool	check_map_borders(char **map);
 
-	j = 0;
-	if (!line[j])
-		return (false);
-	while (line[j])
-	{
-		if (line[j] != '0' && line[j] != '1' && line[j] != ' '
-			&& line[j] != 'N' && line[j] != 'S'
-			&& line[j] != 'W' && line[j] != 'E')
-			return (false);
-		j++;
-	}
-	return (true);
+void	map_validation(t_val *val)
+{
+	indetifiers_check(val);
+	missing_indetifiers_check(val);
+	texture_open_check(val);
+	map_structure_check(val);
+	starting_position_check(val);
+	if (!check_map_borders(&val->mapv[val->map_first_i]))
+		validation_error_msg("A map doesn't have closed borders", NULL);
 }
 
-static size_t	map_start(char **mapv)
+static size_t	count_rows(char **map)
 {
-	size_t	i;
+	size_t	count;
 
-	i = 0;
-	while (mapv[i])
-	{
-		if (is_valid_map_line(mapv[i]))
-			return (i);
-		i++;
-	}
+	count = 0;
+	while (map[count] != 0)
+		count++;
+	return (count);
+}
+
+static int	is_out_of_bounds(size_t i, size_t j, size_t total_rows, char **map)
+{
+	size_t	len;
+
+	if (i >= total_rows)
+		return (1);
+	len = ft_strlen(map[i]);
+	return (j >= len);
+}
+
+static size_t	is_border(char **map, size_t total_rows, size_t i, size_t j)
+{
+	if (is_out_of_bounds(i - 1, j, total_rows, map) || map[i - 1][j] == ' ')
+		return (1);
+	if (is_out_of_bounds(i + 1, j, total_rows, map) || map[i + 1][j] == ' ')
+		return (1);
+	if (is_out_of_bounds(i, j + 1, total_rows, map) || map[i][j + 1] == ' ')
+		return (1);
+	if (j == 0 || map[i][j - 1] == ' ')
+		return (1);
 	return (0);
 }
 
-void	map_structure_check(t_val *val)
+bool	check_map_borders(char **map)
 {
+	size_t	rows;
+	size_t	len;
 	size_t	i;
-	char	*map_requirments;
+	size_t	j;
+	char	cell;
 
-	map_requirments = "\nThe valid map should have closed borders of 1's"
-		"\nIt contains only following symbols: 1, 0, N, S, W, E";
-	val->map_first_i = map_start(val->mapv);
-	if (val->map_first_i == 0)
-		validation_error_msg("Map file should contain a map", map_requirments);
-	if (val->map_first_i <= val->indetifier_last_i
-		&& val->indetifier_last_i != 0)
-		validation_error_msg("A map should be positioned after "
-			"textures and colours identifiers", map_requirments);
-	i = val->indetifier_last_i + 1;
-	while (val->mapv[i])
-	{
-		if (!is_valid_map_line(val->mapv[i]))
-			validation_error_msg("A map contains an incorrect symbol",
-				map_requirments);
-		i++;
-	}
-}
-
-static double	set_x_starting_position(t_val *val, size_t i)
-{
-	double	starting_pos_x;
-
-	starting_pos_x = 0;
-	if (ft_strchr(val->mapv[i], 'N'))
-	{
-		starting_pos_x = (ft_strchr(val->mapv[i], 'N') - val->mapv[i]);
-		val->direction = 'N';
-	}
-	else if (ft_strchr(val->mapv[i], 'S'))
-	{
-		starting_pos_x = (ft_strchr(val->mapv[i], 'S') - val->mapv[i]);
-		val->direction = 'S';
-	}
-	else if (ft_strchr(val->mapv[i], 'W'))
-	{
-		starting_pos_x = (ft_strchr(val->mapv[i], 'W') - val->mapv[i]);
-		val->direction = 'W';
-	}
-	else if (ft_strchr(val->mapv[i], 'E'))
-	{
-		starting_pos_x = (ft_strchr(val->mapv[i], 'E') - val->mapv[i]);
-		val->direction = 'E';
-	}
-	return (starting_pos_x);
-}
-
-static size_t	check_inline_identifiers(char *line)
-{
-	size_t	i;
-	size_t	counter;
-
+	rows = count_rows(map);
 	i = 0;
-	counter = 0;
-	while (line[i])
+	while (i < rows)
 	{
-		if (line[i] == 'N')
-			counter++;
-		else if (line[i] == 'S')
-			counter++;
-		else if (line[i] == 'W')
-			counter++;
-		else if (line[i] == 'E')
-			counter++;
-		i++;
-	}
-	return (counter);
-}
-
-void	starting_position_check(t_val *val)
-{
-	size_t	i;
-	size_t	counter;
-
-	i = val->indetifier_last_i;
-	counter = 0;
-	while (val->mapv[i])
-	{
-		if (ft_strchr(val->mapv[i], 'N') || ft_strchr(val->mapv[i], 'S')
-			|| ft_strchr(val->mapv[i], 'W') || ft_strchr(val->mapv[i], 'E'))
+		len = ft_strlen(map[i]);
+		j = 0;
+		while (j < len)
 		{
-			counter = check_inline_identifiers(val->mapv[i]);
-			val->starting_pos[0] = set_x_starting_position(val, i);
-			val->starting_pos[1] = i;
+			cell = map[i][j];
+			if (cell != ' ')
+				if (is_border(map, rows, i, j))
+					if (cell != '1')
+						return (false);
+			j = j + 1;
 		}
-		if (counter > 1)
-			validation_error_msg("You can set only one "
-				"player on the map", NULL);
-		i++;
+		i = i + 1;
 	}
-	val->starting_pos[0] += 0.5;
-	val->starting_pos[1] -= val->indetifier_last_i + 0.5;
+	return (true);
 }

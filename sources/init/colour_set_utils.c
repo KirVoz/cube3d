@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 04:47:44 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/15 15:11:41 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/15 17:08:15 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static char	**colour_split(t_val *val, size_t ind)
 	return (res);
 }
 
-static void	set_rgb(t_val *val, t_col_type col_type, char **res, size_t ind)
+static void	parse_val_rgb(t_val *val, t_col_type col_type, char **res)
 {
 	size_t	i;
 
@@ -69,10 +69,18 @@ static void	set_rgb(t_val *val, t_col_type col_type, char **res, size_t ind)
 	i = 0;
 	while (val->colours[col_type].rgb[i])
 	{
-		if (!(val->colours[col_type].rgb[i] >= 0 && val->colours[col_type].rgb[i] <= 255))
-			validation_error_msg("RGB colour should be between 0 and 255", NULL);
+		if (!(val->colours[col_type].rgb[i] >= 0
+				&& val->colours[col_type].rgb[i] <= 255))
+			validation_error_msg("RGB colour should be between "
+				"0 and 255", NULL);
 		i++;
 	}
+}
+
+static void	rgb_free(t_val *val, t_col_type col_type, char **res, size_t ind)
+{
+	size_t	i;
+
 	i = 0;
 	while (res[i])
 	{
@@ -83,7 +91,7 @@ static void	set_rgb(t_val *val, t_col_type col_type, char **res, size_t ind)
 	val->colours[col_type].counter++;
 	if (val->colours[col_type].counter > 1)
 		validation_error_msg("You can set only one RGB set of colours for the ",
-			val->colours_name[col_type]);
+			val->col_name[col_type]);
 	val->colours[col_type].was_parsed = true;
 	if (ind + 1 > val->indetifier_last_i)
 		val->indetifier_last_i = ind + 1;
@@ -96,5 +104,6 @@ void	colour_set(t_val *val, t_col_type col_type, size_t ind)
 	res = NULL;
 	validate_commas(val);
 	res = colour_split(val, ind);
-	set_rgb(val, col_type, res, ind);
+	parse_val_rgb(val, col_type, res);
+	rgb_free(val, col_type, res, ind);
 }

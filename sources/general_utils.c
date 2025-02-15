@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:22:17 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/15 15:11:06 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/15 16:25:44 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,4 @@ void	validation_error_msg(char *msg, char *var)
 		write(2, var, ft_strlen(var));
 	write(2, "\n", 1);
 	exit(EXIT_FAILURE);
-}
-
-void	full_print(char *str) //del
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\n')
-			printf("\\n");
-		else if (str[i] >= 0 && str[i] <= 32)
-			printf("()");
-		else
-			printf("%c", str[i]);
-		i++;
-	}
-	if (str[i] == '\0')
-		printf("\\0");
-	printf("\n");
 }

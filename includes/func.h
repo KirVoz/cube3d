@@ -53,8 +53,8 @@ typedef struct s_data
 	size_t		map_width;
 
 	char		**wall;
-	t_keys		*keys;
-	t_mouse		*mouse;
+	t_keys		keys;
+	t_mouse		mouse;
 	t_texture	t[4];
 }				t_data;
 
@@ -126,12 +126,9 @@ void			hooks(t_data *data);
 void			draw_viewing_angle(t_data *data, int color);
 void			draw_lines(t_data *data, t_viewer *v);
 
-void			init_main(char **argv, t_data *game);
-
 // utils
 void			exit_fail(char *exit_message);
 void			validation_error_msg(char *msg, char *var);
-void	full_print(char *str); // del
 // end of utils
 
 // memory managment

@@ -6,48 +6,18 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:49:43 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/15 15:27:48 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/15 17:25:20 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "init.h"
 
-static void	data_init(t_val *val, t_data *data);
-static void	position_init(t_data *data, t_val *val);
-static void	map_init(t_data *data, t_val *val);
-static void	hooks_init(t_data *data);
+static void		textures_init(t_data *data, t_val *val);
+static void		position_init(t_data *data, t_val *val);
+static void		hooks_init(t_data *data);
+static t_val	*free_val(t_val *val);
 
-void	init_main(char **argv, t_data *data)
-{
-	t_val	*val;
-
-	val = (t_val *)s_alloc(1, sizeof(t_val));
-	data = (t_data *)s_alloc(1, sizeof(t_data));
-	parser_main(val, argv);
-	data_init(val, data);
-}
-
-static void	print_int_map(t_data *data) //del
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	j = 0;
-	while (i < data->map_height)
-	{
-		while (j < data->map_width)
-		{
-			printf("%d", data->map1[i][j]);
-			j++;
-		}
-		j = 0;
-		i++;
-		printf("\n");
-	}
-}
-
-static void	data_init(t_val *val, t_data *data)
+void	data_init(t_val *val, t_data *data)
 {
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "Cub3D");
@@ -57,86 +27,23 @@ static void	data_init(t_val *val, t_data *data)
 	textures_init(data, val);
 	position_init(data, val);
 	map_init(data, val);
-	// print_int_map(data); //del
 	hooks_init(data);
+	val = free_val(val);
 	mlx_loop_hook(data->mlx, render_next_frame, data);
 	mlx_loop(data->mlx);
 }
 
-static void	hooks_init(t_data *data)
-{
-	data->keys = (t_keys *)s_alloc(1, sizeof(t_keys));
-	data->mouse = (t_mouse *)s_alloc(1, sizeof(t_mouse));
-	data->keys->w = 0;
-	data->keys->a = 0;
-	data->keys->s = 0;
-	data->keys->d = 0;
-	data->keys->left = 0;
-	data->keys->right = 0;
-	data->keys->moveSpeed = 0.05;
-	data->mouse->rotSpeed = 2 * (PI / 180);
-	data->pitch = 0;
-	hooks(data);
-}
-
-static void	map_size(t_data *data, t_val *val)
-{
-	size_t	i;
-	size_t	j;
-
-	i = val->map_first_i;
-	j = 0;
-	data->map_height = 0;
-	data->map_width = 0;
-	while (val->mapv[i])
-	{
-		while (val->mapv[i][j])
-			j++;
-		if (j > data->map_width)
-			data->map_width = j;
-		j = 0;
-		i++;
-	}
-	data->map_height = i - val->map_first_i;
-}
-
-static void	map_alloc(t_data *data)
+static void	textures_init(t_data *data, t_val *val)
 {
 	size_t	i;
 
 	i = 0;
-	data->map1 = (int **)s_alloc(data->map_height, sizeof(int *));
-	while (i < data->map_height)
+	while (i < TEX_COUNT)
 	{
-		data->map1[i] = (int *)s_alloc(data->map_width, sizeof(int));
-		i++;
-	}
-}
-
-static void	map_init(t_data *data, t_val *val)
-{
-	size_t	i;
-	size_t	j;
-
-	i = val->map_first_i;
-	j = 0;
-	map_size(data, val);
-	map_alloc(data);
-	while (val->mapv[i])
-	{
-		while (val->mapv[i][j])
-		{
-			if (val->mapv[i][j] == '1')
-				data->map1[i - val->map_first_i][j] = 1;
-			else if (val->mapv[i][j] == '0' || val->mapv[i][j] == 'N'
-					|| val->mapv[i][j] == 'S' || val->mapv[i][j] == 'W'
-					|| val->mapv[i][j] == 'E')
-				data->map1[i - val->map_first_i][j] = 0;
-			else
-				data->map1[i - val->map_first_i][j] = 2;
-			j++;
-		}
-		j = 0;
+		data->t[i].img = mlx_xpm_file_to_image(data->mlx, val->textures[i].path,
+				&data->t[i].width, &data->t[i].height);
+		data->t[i].addr = mlx_get_data_addr(data->t[i].img, &data->t[i].bpp,
+				&data->t[i].line_length, &data->t[i].endian);
 		i++;
 	}
 }
@@ -167,4 +74,33 @@ static void	position_init(t_data *data, t_val *val)
 	}
 	data->planeX = -data->dirY * planeLen;
 	data->planeY = data->dirX * planeLen;
+}
+
+static void	hooks_init(t_data *data)
+{
+	data->keys.w = 0;
+	data->keys.a = 0;
+	data->keys.s = 0;
+	data->keys.d = 0;
+	data->keys.left = 0;
+	data->keys.right = 0;
+	data->keys.moveSpeed = 0.03;
+	data->mouse.sense = 0.01;
+	data->mouse.rotSpeed = 0.85 * (PI / 180);
+	data->pitch = 0;
+	hooks(data);
+}
+
+static t_val	*free_val(t_val *val)
+{
+	size_t	i;
+
+	i = 0;
+	while (val->mapv[i])
+		free(val->mapv[i++]);
+	free(val->mapv);
+	while (val->tex_type < TEX_COUNT)
+		free(val->textures[val->tex_type++].path);
+	free(val);
+	return (NULL);
 }

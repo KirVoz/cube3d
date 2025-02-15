@@ -66,16 +66,16 @@ void	move_right(t_data *data, double moveSpeed)
 
 void	move_player(t_data *data)
 {
-	if (data->keys->w)
-		move_forward(data, data->keys->moveSpeed);
-	if (data->keys->s)
-		move_backward(data, data->keys->moveSpeed);
-	if (data->keys->a)
-		move_left(data, data->keys->moveSpeed);
-	if (data->keys->d)
-		move_right(data, data->keys->moveSpeed);
-	if (data->keys->left)
-		rotate_left_right(data, data->mouse->rotSpeed);
-	if (data->keys->right)
-		rotate_left_right(data, -data->mouse->rotSpeed);
+	if (data->keys.w)
+		move_forward(data, data->keys.moveSpeed);
+	if (data->keys.s)
+		move_backward(data, data->keys.moveSpeed);
+	if (data->keys.a)
+		move_left(data, data->keys.moveSpeed);
+	if (data->keys.d)
+		move_right(data, data->keys.moveSpeed);
+	if (data->keys.left)
+		rotate_left_right(data, data->mouse.rotSpeed);
+	if (data->keys.right)
+		rotate_left_right(data, -data->mouse.rotSpeed);
 }

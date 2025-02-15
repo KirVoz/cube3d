@@ -2,33 +2,34 @@ NAME =			cub3D
 
 SRC_PATH =		sources
 INI_PATH =		sources/init
-MEM_PATH =		sources/memory_managment
-UTL_PATH =		sources/utils
+MOV_PATH =		sources/move
+DRW_PATH =		sources/draw
+RND_PATH =		sources/render
 INC_PATH =		includes
 LIB_PATH =		libraries
 LFT_PATH =		libraries/libft
 OBJ_DIR  =		objects
 
-SRC =	main.c \
+SRC =	cub3D.c \
 		$(SRC_PATH)/map.c \
-		$(SRC_PATH)/move/keys.c \
-		$(SRC_PATH)/move/move_player.c \
-		$(SRC_PATH)/move/rotate.c \
-		$(SRC_PATH)/draw/draw_map.c \
-		$(SRC_PATH)/draw/draw_player.c \
-		$(SRC_PATH)/render/render_frames.c \
-		$(SRC_PATH)/render/render.c \
-		$(SRC_PATH)/init/textures.c \
+		$(MOV_PATH)/keys.c \
+		$(MOV_PATH)/move_player.c \
+		$(MOV_PATH)/rotate.c \
+		$(DRW_PATH)/draw_map.c \
+		$(DRW_PATH)/draw_player.c \
+		$(RND_PATH)/render_frames.c \
+		$(RND_PATH)/render.c \
+		$(SRC_PATH)/allocator.c \
+		$(SRC_PATH)/general_utils.c \
 		$(INI_PATH)/init.c \
+		$(INI_PATH)/map_init.c \
 		$(INI_PATH)/parser.c \
-		$(INI_PATH)/validator.c \
+		$(INI_PATH)/map_validator.c \
 		$(INI_PATH)/file_validator.c \
 		$(INI_PATH)/identifier_validator.c \
-		$(INI_PATH)/map_validator.c \
-		$(MEM_PATH)/allocator.c \
-		$(UTL_PATH)/general_utils.c \
-		$(UTL_PATH)/texture_set_utils.c \
-		$(UTL_PATH)/colour_set_utils.c
+		$(INI_PATH)/map_structure_check.c \
+		$(INI_PATH)/texture_set_utils.c \
+		$(INI_PATH)/colour_set_utils.c
 
 OSRC  = 	$(SRC:%.c=$(OBJ_DIR)/%.o)
 MLX   =		$(MLX_PATH)/libmlx.a

@@ -6,21 +6,13 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 03:44:37 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/15 15:24:51 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/15 16:55:14 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "init.h"
 
-static char	*skip_whitespaces(char *mapv)
-{
-	size_t	i;
-
-	i = 0;
-	while (mapv[i] && mapv[i] == ' ')
-		i++;
-	return (&mapv[i]);
-}
+static char	*skip_whitespaces(char *mapv);
 
 void	indetifiers_check(t_val *val)
 {
@@ -64,7 +56,39 @@ void	missing_indetifiers_check(t_val *val)
 	{
 		if (val->colours[i].was_parsed == false)
 			validation_error_msg("You need to set colours for the ",
-				val->colours_name[i]);
+				val->col_name[i]);
 		i++;
 	}
+}
+
+size_t	check_inline_identifiers(char *line)
+{
+	size_t	i;
+	size_t	counter;
+
+	i = 0;
+	counter = 0;
+	while (line[i])
+	{
+		if (line[i] == 'N')
+			counter++;
+		else if (line[i] == 'S')
+			counter++;
+		else if (line[i] == 'W')
+			counter++;
+		else if (line[i] == 'E')
+			counter++;
+		i++;
+	}
+	return (counter);
+}
+
+static char	*skip_whitespaces(char *mapv)
+{
+	size_t	i;
+
+	i = 0;
+	while (mapv[i] && mapv[i] == ' ')
+		i++;
+	return (&mapv[i]);
 }

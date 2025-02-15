@@ -6,11 +6,12 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:25:51 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/15 15:21:37 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/15 17:00:11 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "init.h"
 
 void	*s_alloc(size_t count, size_t size)
 {

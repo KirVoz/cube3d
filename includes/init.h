@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 19:18:56 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/15 15:28:56 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/15 16:53:58 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_validation
 	char		*tex_name[4];
 	t_col_val	colours[COLOURS_COUNT];
 	t_col_type	col_type;
-	char		*colours_name[2];
+	char		*col_name[2];
 	size_t		indetifier_last_i;
 	size_t		map_first_i;
 	double		starting_pos[2];
@@ -65,21 +65,19 @@ typedef struct s_validation
 
 // init
 void		parser_main(t_val *val, char **argv);
-void		textures_init(t_data *data, t_val *val);
-// file_validator
+void		data_init(t_val *val, t_data *data);
+void		map_init(t_data *data, t_val *val);
+// validator
 void		extension_validation(char *map_path);
 int			open_map_validation(char *map_path);
 void		texture_open_check(t_val *val);
-// validator
 void		map_validation(t_val *val);
-
-// identifier_validator
+size_t		check_inline_identifiers(char *line);
+// identifiers/map_check
 void		indetifiers_check(t_val *val);
 void		missing_indetifiers_check(t_val *val);
-// map_validator
 void		map_structure_check(t_val *val);
 void		starting_position_check(t_val *val);
-
 // utils
 void		texture_set(t_val *val, t_tex_type col_type, size_t ind);
 void		colour_set(t_val *val, t_col_type col_type, size_t ind);
