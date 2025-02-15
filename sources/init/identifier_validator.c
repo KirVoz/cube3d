@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 03:44:37 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/13 05:38:57 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/15 14:55:14 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,23 @@ static char	*skip_whitespaces(char *mapv)
 void	indetifiers_check(t_val *val)
 {
 	size_t	i;
-	char	*map_without_wp;
+	char	*line_without_wp;
 
 	i = 0;
 	while (val->mapv[i])
 	{
-		map_without_wp = skip_whitespaces(val->mapv[i]);
-		if (!ft_strncmp(map_without_wp, "NO ", 3))
+		line_without_wp = skip_whitespaces(val->mapv[i]);
+		if (!ft_strncmp(line_without_wp, "NO ", 3))
 			texture_set(val, NO, i);
-		else if (!ft_strncmp(map_without_wp, "SO ", 3))
+		else if (!ft_strncmp(line_without_wp, "SO ", 3))
 			texture_set(val, SO, i);
-		else if (!ft_strncmp(map_without_wp, "WE ", 3))
+		else if (!ft_strncmp(line_without_wp, "WE ", 3))
 			texture_set(val, WE, i);
-		else if (!ft_strncmp(map_without_wp, "EA ", 3))
+		else if (!ft_strncmp(line_without_wp, "EA ", 3))
 			texture_set(val, EA, i);
-		else if (!ft_strncmp(map_without_wp, "C ", 2))
+		else if (!ft_strncmp(line_without_wp, "C ", 2))
 			colour_set(val, C, i);
-		else if (!ft_strncmp(map_without_wp, "F ", 2))
+		else if (!ft_strncmp(line_without_wp, "F ", 2))
 			colour_set(val, F, i);
 		i++;
 	}

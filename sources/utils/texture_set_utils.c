@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 04:22:59 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/13 05:52:17 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/15 15:10:55 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	*find_path(char *str)
 	path = ft_strdup(&(str[i]));
 	if (path[ft_strlen(path) - 1] == '\n')
 		path[ft_strlen(path) - 1] = '\0';
-	return(path);
+	return (path);
 }
 
 void	texture_set(t_val *val, t_tex_type tex_type, size_t ind)

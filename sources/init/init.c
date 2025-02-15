@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:49:43 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/13 21:43:36 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/15 15:09:38 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,26 @@ void	init_main(char **argv, t_data *data)
 	data_init(val, data);
 }
 
+static void	print_int_map(t_data *data) //del
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	while (i < data->map_height)
+	{
+		while (j < data->map_width)
+		{
+			printf("%d", data->map1[i][j]);
+			j++;
+		}
+		j = 0;
+		i++;
+		printf("\n");
+	}
+}
+
 static void	data_init(t_val *val, t_data *data)
 {
 	data->mlx = mlx_init();
@@ -37,18 +57,7 @@ static void	data_init(t_val *val, t_data *data)
 	textures_init(data, val);
 	position_init(data, val);
 	map_init(data, val);
-	// size_t	i = 0, j = 0;
-	// while (i < data->map_height)
-	// {
-	// 	while (j < data->map_width)
-	// 	{
-	// 		printf("%d", data->map1[i][j]);
-	// 		j++;
-	// 	}
-	// 	j = 0;
-	// 	i++;
-	// 	printf("\n");
-	// }
+	print_int_map(data); //del
 	hooks_init(data);
 	mlx_loop_hook(data->mlx, render_next_frame, data);
 	mlx_loop(data->mlx);
@@ -65,7 +74,7 @@ static void	hooks_init(t_data *data)
 	data->keys->left = 0;
 	data->keys->right = 0;
 	data->keys->moveSpeed = 0.05;
-	data->mouse->rotSpeed = 1.5 * (PI / 180);
+	data->mouse->rotSpeed = 2 * (PI / 180);
 	data->pitch = 0;
 	hooks(data);
 }
@@ -129,7 +138,7 @@ static void	map_init(t_data *data, t_val *val)
 		}
 		j = 0;
 		i++;
-		}
+	}
 }
 
 static void	position_init(t_data *data, t_val *val)

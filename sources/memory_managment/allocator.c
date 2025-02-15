@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:25:51 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/12 00:03:28 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/15 15:10:41 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	*s_alloc(size_t count, size_t size)
 void	*s_realloc(void *ptr, size_t old_size, size_t new_size)
 {
 	void	*reallocated_memory;
+
 	reallocated_memory = ft_realloc(ptr, old_size, new_size);
 	if (!reallocated_memory)
 		exit_fail("Failed to reallocate memory");

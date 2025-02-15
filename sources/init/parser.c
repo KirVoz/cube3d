@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:15:05 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/12 18:33:51 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/14 23:49:42 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,6 @@ void	parser_main(t_val *val, char **argv)
 	val->fd = open_map_validation(argv[1]);
 	val->mapv = read_map(val->fd);
 	close(val->fd);
-	map_validation(val); //
+	map_validation(val);
 	printf("\nSuccessful parsing and validation 🎉\n\n"); //del
 }

@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 04:44:08 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/13 18:58:26 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/15 15:09:59 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,48 +47,75 @@ static size_t	map_start(char **mapv)
 void	map_structure_check(t_val *val)
 {
 	size_t	i;
+	char	*map_requirments;
 
+	map_requirments = "\nThe valid map should have closed borders of 1's"
+		"\nIt contains only following symbols: 1, 0, N, S, W, E";
 	val->map_first_i = map_start(val->mapv);
 	if (val->map_first_i == 0)
-		validation_error_msg("Map file should contain a map", NULL);
+		validation_error_msg("Map file should contain a map", map_requirments);
 	if (val->map_first_i <= val->indetifier_last_i
 		&& val->indetifier_last_i != 0)
 		validation_error_msg("A map should be positioned after "
-			"textures and colours identifiers", NULL);
+			"textures and colours identifiers", map_requirments);
 	i = val->indetifier_last_i + 1;
 	while (val->mapv[i])
 	{
 		if (!is_valid_map_line(val->mapv[i]))
-		{
-			full_print(val->mapv[i]); //del
-			validation_error_msg("A map contains an incorrect symbol", NULL);
-		}
+			validation_error_msg("A map contains an incorrect symbol",
+				map_requirments);
 		i++;
 	}
 }
 
-static void	set_x_starting_position(t_val *val, size_t i)
+static double	set_x_starting_position(t_val *val, size_t i)
 {
+	double	starting_pos_x;
+
+	starting_pos_x = 0;
 	if (ft_strchr(val->mapv[i], 'N'))
 	{
-		val->starting_pos[0] = (ft_strchr(val->mapv[i], 'N') - val->mapv[i]);
+		starting_pos_x = (ft_strchr(val->mapv[i], 'N') - val->mapv[i]);
 		val->direction = 'N';
 	}
 	else if (ft_strchr(val->mapv[i], 'S'))
 	{
-		val->starting_pos[0] = (ft_strchr(val->mapv[i], 'S') - val->mapv[i]);
+		starting_pos_x = (ft_strchr(val->mapv[i], 'S') - val->mapv[i]);
 		val->direction = 'S';
 	}
 	else if (ft_strchr(val->mapv[i], 'W'))
 	{
-		val->starting_pos[0] = (ft_strchr(val->mapv[i], 'W') - val->mapv[i]);
+		starting_pos_x = (ft_strchr(val->mapv[i], 'W') - val->mapv[i]);
 		val->direction = 'W';
 	}
 	else if (ft_strchr(val->mapv[i], 'E'))
 	{
-		val->starting_pos[0] = (ft_strchr(val->mapv[i], 'E') - val->mapv[i]);
+		starting_pos_x = (ft_strchr(val->mapv[i], 'E') - val->mapv[i]);
 		val->direction = 'E';
 	}
+	return (starting_pos_x);
+}
+
+static size_t	check_inline_identifiers(char *line)
+{
+	size_t	i;
+	size_t	counter;
+
+	i = 0;
+	counter = 0;
+	while (line[i])
+	{
+		if (line[i] == 'N')
+			counter++;
+		else if (line[i] == 'S')
+			counter++;
+		else if (line[i] == 'W')
+			counter++;
+		else if (line[i] == 'E')
+			counter++;
+		i++;
+	}
+	return (counter);
 }
 
 void	starting_position_check(t_val *val)
@@ -103,8 +130,8 @@ void	starting_position_check(t_val *val)
 		if (ft_strchr(val->mapv[i], 'N') || ft_strchr(val->mapv[i], 'S')
 			|| ft_strchr(val->mapv[i], 'W') || ft_strchr(val->mapv[i], 'E'))
 		{
-			counter++;
-			set_x_starting_position(val, i);
+			counter = check_inline_identifiers(val->mapv[i]);
+			val->starting_pos[0] = set_x_starting_position(val, i);
 			val->starting_pos[1] = i;
 		}
 		if (counter > 1)
