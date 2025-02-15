@@ -3,10 +3,7 @@
 int	key_press(int keycode, t_data *data)
 {
 	if (keycode == 53 || keycode == 65307)
-	{
-		mlx_destroy_window(data->mlx, data->win);
-		exit(0);
-	}
+		close_cub(data);
 	if (keycode == 13 || keycode == 119)
 		data->keys.w = 1;
 	if (keycode == 0 || keycode == 97)

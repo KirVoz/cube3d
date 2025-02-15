@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   identifier_validator.c                             :+:      :+:    :+:   */
+/*   identifiers_check.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 03:44:37 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/15 16:55:14 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/15 19:34:09 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	indetifiers_check(t_val *val)
 			colour_set(val, F, i);
 		i++;
 	}
+	texture_open_validation(val);
 }
 
 void	missing_indetifiers_check(t_val *val)

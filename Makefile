@@ -11,7 +11,6 @@ LFT_PATH =		libraries/libft
 OBJ_DIR  =		objects
 
 SRC =	cub3D.c \
-		$(SRC_PATH)/map.c \
 		$(MOV_PATH)/keys.c \
 		$(MOV_PATH)/move_player.c \
 		$(MOV_PATH)/rotate.c \
@@ -19,17 +18,17 @@ SRC =	cub3D.c \
 		$(DRW_PATH)/draw_player.c \
 		$(RND_PATH)/render_frames.c \
 		$(RND_PATH)/render.c \
-		$(SRC_PATH)/allocator.c \
-		$(SRC_PATH)/general_utils.c \
-		$(INI_PATH)/init.c \
+		$(INI_PATH)/data_init.c \
 		$(INI_PATH)/map_init.c \
 		$(INI_PATH)/parser.c \
 		$(INI_PATH)/map_validator.c \
 		$(INI_PATH)/file_validator.c \
-		$(INI_PATH)/identifier_validator.c \
+		$(INI_PATH)/identifiers_check.c \
 		$(INI_PATH)/map_structure_check.c \
-		$(INI_PATH)/texture_set_utils.c \
-		$(INI_PATH)/colour_set_utils.c
+		$(INI_PATH)/texture_set.c \
+		$(INI_PATH)/colour_set.c \
+		$(SRC_PATH)/allocator.c \
+		$(SRC_PATH)/general_utils.c
 
 OSRC  = 	$(SRC:%.c=$(OBJ_DIR)/%.o)
 MLX   =		$(MLX_PATH)/libmlx.a
@@ -38,7 +37,7 @@ INCLUDES = 	$(INC_PATH)/cub3d.h
 
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -I./includes -g #-fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -g -I./includes -g -fsanitize=thread
 
 ifeq ($(shell uname),Darwin)
  MLX_PATH = $(LIB_PATH)/Minilibx
@@ -62,9 +61,6 @@ $(MLX):
 	@echo "MLX created"
 	@make -C $(MLX_PATH)
 
-ex: $(NAME)
-	@./cub3D
-
 $(OBJ_DIR)/%.o: %.c $(INCLUDES) Makefile
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -82,4 +78,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re ex
+.PHONY: all clean fclean re
