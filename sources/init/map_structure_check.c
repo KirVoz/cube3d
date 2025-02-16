@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 04:44:08 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/15 19:24:20 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/16 15:59:33 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	starting_position_check(t_val *val)
 				"player on the map", NULL);
 		i++;
 	}
+	if (counter == 0)
+		validation_error_msg("You need to set at least one player", NULL);
 	val->starting_pos[0] += 0.5;
 	val->starting_pos[1] -= val->indetifier_last_i + 0.5;
 }

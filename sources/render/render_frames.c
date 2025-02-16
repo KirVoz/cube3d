@@ -11,8 +11,8 @@ static void	draw_minimap(t_data *data)
 int	render_next_frame(t_data *data)
 {
 	move_player(data);
-	fill_sealing(data, 0x888888);
-	fill_floor(data, 0x444444);
+	fill_ceiling(data, data->colours[C]);
+	fill_floor(data, data->colours[F]);
 	draw_scene(data);
 	draw_minimap(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);

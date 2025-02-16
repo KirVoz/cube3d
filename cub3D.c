@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 15:43:08 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/15 20:00:58 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/16 15:47:09 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static t_data	*exit_free(t_data *data)
 	size_t	i;
 
 	i = 0;
-	while (data->map1[i])
+	while (i < data->map_height)
 		free(data->map1[i++]);
 	free(data->map1);
 	free(data);
@@ -89,7 +89,6 @@ int	main(int argc, char **argv)
 		parser_main(val, argv);
 		data = (t_data *)s_alloc(1, sizeof(t_data));
 		data_init(val, data);
-		data = exit_free(data);
 	}
 	else
 		exit_fail("Pass a map with .cub extension");

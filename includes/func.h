@@ -1,6 +1,22 @@
 #ifndef FUNC_H
 # define FUNC_H
 
+typedef enum e_tex_type
+{
+	NO,
+	SO,
+	WE,
+	EA,
+	TEX_COUNT
+}			t_tex_type;
+
+typedef enum e_colour_type
+{
+	C,
+	F,
+	COLOURS_COUNT
+}			t_col_type;
+
 typedef struct s_draw_texture
 {
 	double		hit;
@@ -75,7 +91,8 @@ typedef struct s_data
 	char		**wall;
 	t_keys		keys;
 	t_mouse		mouse;
-	t_texture	t[4];
+	t_texture	t[TEX_COUNT];
+	int			colours[COLOURS_COUNT];
 }				t_data;
 
 typedef struct s_ray
@@ -132,7 +149,7 @@ int				check_collision(t_data *data, double newPosX, double newPosY);
 void			draw_map(t_data *data);
 void			draw_scene(t_data *data);
 void			fill_floor(t_data *data, int color);
-void			fill_sealing(t_data *data, int color);
+void			fill_ceiling(t_data *data, int color);
 void			fill_map(t_data *data, int color);
 void			print_player(t_data *data, int color);
 int				mouse_move(int x, int y, t_data *data);
@@ -151,12 +168,8 @@ void			hooks(t_data *data);
 void			draw_viewing_angle(t_data *data, int color);
 void			draw_lines(t_data *data, t_viewer *v);
 
-// utils
 void			exit_fail(char *exit_message);
 void			validation_error_msg(char *msg, char *var);
-// end of utils
-
-// memory managment
 void			*s_alloc(size_t count, size_t size);
 void			*s_realloc(void *ptr, size_t old_size, size_t new_size);
 void			*ft_realloc(void *ptr, size_t old_size, size_t new_size);

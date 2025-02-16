@@ -18,7 +18,7 @@ void	fill_floor(t_data *data, int color)
 	}
 }
 
-void	fill_sealing(t_data *data, int color)
+void	fill_ceiling(t_data *data, int color)
 {
 	int	x;
 	int	y;
