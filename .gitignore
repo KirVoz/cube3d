@@ -34,6 +34,7 @@ Cub3D_tester
 *.so.*
 *.dylib
 vgcore.*
+.vscode
 
 # Executables
 *.exe

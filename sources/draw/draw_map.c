@@ -33,15 +33,20 @@ static void	draw_tile(t_data *data, int x, int y, int color)
 	}
 }
 
+static void	init_draw_map(t_data *data, t_draw_map *cord)
+{
+	cord->start_x = (int)data->posX - MINIMAP_SIZE_W / 2;
+	cord->start_y = (int)data->posY - MINIMAP_SIZE_H / 2;
+	cord->end_x = cord->start_x + MINIMAP_SIZE_W;
+	cord->end_y = cord->start_y + MINIMAP_SIZE_H;
+	cord->y = cord->start_y;
+}
+
 void	draw_map(t_data *data)
 {
 	t_draw_map	cord;
 
-	cord.start_x = (int)data->posX - MINIMAP_SIZE_W / 2;
-	cord.start_y = (int)data->posY - MINIMAP_SIZE_H / 2;
-	cord.end_x = cord.start_x + MINIMAP_SIZE_W;
-	cord.end_y = cord.start_y + MINIMAP_SIZE_H;
-	cord.y = cord.start_y;
+	init_draw_map(data, &cord);
 	while (cord.y < cord.end_y)
 	{
 		cord.x = cord.start_x;
@@ -52,9 +57,12 @@ void	draw_map(t_data *data)
 			{
 				draw_tile_border(data, cord.x - cord.start_x, cord.y
 					- cord.start_y);
-				if (data->map1[cord.y][cord.x] == 1)
+				if (data->map1[cord.y][cord.x] != 0)
 					draw_tile(data, cord.x - cord.start_x, cord.y
 						- cord.start_y, 0xFFFFFF);
+				else
+					draw_tile(data, cord.x - cord.start_x, cord.y
+						- cord.start_y, 0xFF0000);
 			}
 			cord.x++;
 		}
