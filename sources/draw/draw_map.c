@@ -33,29 +33,6 @@ static void	draw_tile(t_data *data, int x, int y, int color)
 	}
 }
 
-// void	draw_map(t_data *data)
-// {
-// 	int	y;
-// 	int	x;
-// 	int	color;
-
-// 	y = 0;
-// 	while (y < 10)
-// 	{
-// 		x = 0;
-// 		while (x < 10)
-// 		{
-// 			if (data->map1[y][x] == 1)
-// 				color = 0xFFFFFF;
-// 			draw_tile_border(data, x, y);
-// 			if (data->map1[y][x] == 1)
-// 				draw_tile(data, x, y, color);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// }
-
 void	draw_map(t_data *data)
 {
     int	y;

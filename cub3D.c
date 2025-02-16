@@ -58,7 +58,7 @@ void	hooks(t_data *data)
 	mlx_hook(data->win, 2, 1L << 0, key_press, data);
 	mlx_hook(data->win, 3, 1L << 1, key_release, data);
 	mlx_hook(data->win, 17, 1L << 17, close_cub, data);
-	if (__LINUX__)
+	if (!LINUX)
 		mlx_hook(data->win, 6, 1L<<6, mouse_move, data);
 }
 
@@ -79,7 +79,6 @@ int	main(int argc, char **argv)
 	t_data	*data;
 	t_val	*val;
 
-	printf("MAIN\n");
 	if (argc == 2)
 	{
 		val = (t_val *)s_alloc(1, sizeof(t_val));

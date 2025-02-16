@@ -1,7 +1,14 @@
 #ifndef CUB3D_H
 # define CUB3D_H
-# ifndef __LINUX__
-#  define __LINUX__ 1
+// # if defined(__APPLE__) && defined(__MACH__)
+// #  define OS 1
+// # elif defined(__linux__)
+// #  define OS 2
+// # endif
+# ifdef __linux__
+#  define LINUX 1
+# else
+#  define LINUX 0
 # endif
 
 # include "../libraries/Minilibx/mlx.h"

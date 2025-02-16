@@ -30,6 +30,7 @@ cub3D
 *.so
 *.so.*
 *.dylib
+vgcore.*
 
 # Executables
 *.exe
