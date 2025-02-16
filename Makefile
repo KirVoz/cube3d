@@ -16,8 +16,10 @@ SRC =	cub3D.c \
 		$(MOV_PATH)/rotate.c \
 		$(DRW_PATH)/draw_map.c \
 		$(DRW_PATH)/draw_player.c \
+		$(DRW_PATH)/draw_floor_sealing.c \
 		$(RND_PATH)/render_frames.c \
 		$(RND_PATH)/render.c \
+		$(RND_PATH)/render_utils.c \
 		$(INI_PATH)/data_init.c \
 		$(INI_PATH)/map_init.c \
 		$(INI_PATH)/parser.c \
@@ -37,7 +39,7 @@ INCLUDES = 	$(INC_PATH)/cub3d.h
 
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -I./includes -g -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -g -I./includes -g #-fsanitize=thread
 
 ifeq ($(shell uname),Darwin)
  MLX_PATH = $(LIB_PATH)/Minilibx

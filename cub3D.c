@@ -25,12 +25,12 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 int	mouse_move(int x, int y, t_data *data)
 {
-	int	prevX;
-	int	prevY;
+	int	prev_x;
+	int	prev_y;
 
-	prevX = WIDTH / 2;
-	prevY = HEIGHT / 2;
-	data->mouse.rotSpeed = (x - prevX) * data->mouse.sense;
+	prev_x = WIDTH / 2;
+	prev_y = HEIGHT / 2;
+	data->mouse.rotSpeed = (x - prev_x) * data->mouse.sense;
 	data->mouse.oldDirX = data->dirX;
 	data->dirX = data->dirX * cos(-data->mouse.rotSpeed) - data->dirY
 		* sin(-data->mouse.rotSpeed);
@@ -41,10 +41,10 @@ int	mouse_move(int x, int y, t_data *data)
 		* sin(-data->mouse.rotSpeed);
 	data->planeY = data->mouse.oldPlaneX * sin(-data->mouse.rotSpeed)
 		+ data->planeY * cos(-data->mouse.rotSpeed);
-	data->pitch = y - prevY;
+	data->pitch = y - prev_y;
 	mlx_mouse_move(data->win, WIDTH / 2, HEIGHT / 2);
-	prevX = WIDTH / 2;
-	prevY = HEIGHT / 2;
+	prev_x = WIDTH / 2;
+	prev_y = HEIGHT / 2;
 	return (0);
 }
 
@@ -63,7 +63,7 @@ void	hooks(t_data *data)
 	mlx_hook(data->win, 3, 1L << 1, key_release, data);
 	mlx_hook(data->win, 17, 1L << 17, close_cub, data);
 	if (!LINUX)
-		mlx_hook(data->win, 6, 1L<<6, mouse_move, data);
+		mlx_hook(data->win, 6, 1L << 6, mouse_move, data);
 }
 
 static t_data	*exit_free(t_data *data)

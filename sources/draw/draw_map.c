@@ -35,72 +35,30 @@ static void	draw_tile(t_data *data, int x, int y, int color)
 
 void	draw_map(t_data *data)
 {
-    int	y;
-    int	x;
-    int	color;
-    int	start_x;
-    int	start_y;
-    int	end_x;
-    int	end_y;
+	t_draw_map	cord;
 
-    start_x = (int)data->posX - MINIMAP_SIZE_W / 2;
-    start_y = (int)data->posY - MINIMAP_SIZE_H / 2;
-    end_x = start_x + MINIMAP_SIZE_W;
-    end_y = start_y + MINIMAP_SIZE_H;
-
-    y = start_y;
-    while (y < end_y)
-    {
-        x = start_x;
-        while (x < end_x)
-        {
-            if (x >= 0 && x < (int)data->map_width && y >= 0 && y < (int)data->map_height)
-            {
-                if (data->map1[y][x] == 1)
-                    color = 0xFFFFFF;
-                draw_tile_border(data, x - start_x, y - start_y);
-                if (data->map1[y][x] == 1)
-                    draw_tile(data, x - start_x, y - start_y, color);
-            }
-            x++;
-        }
-        y++;
-    }
-}
-
-void	fill_floor(t_data *data, int color)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	while (x < WIDTH)
+	cord.start_x = (int)data->posX - MINIMAP_SIZE_W / 2;
+	cord.start_y = (int)data->posY - MINIMAP_SIZE_H / 2;
+	cord.end_x = cord.start_x + MINIMAP_SIZE_W;
+	cord.end_y = cord.start_y + MINIMAP_SIZE_H;
+	cord.y = cord.start_y;
+	while (cord.y < cord.end_y)
 	{
-		y = HEIGHT / 2;
-		while (y < HEIGHT)
+		cord.x = cord.start_x;
+		while (cord.x < cord.end_x)
 		{
-			my_mlx_pixel_put(data, x, y, color);
-			y++;
+			if (cord.x >= 0 && cord.x < (int)data->map_width && cord.y >= 0
+				&& cord.y < (int)data->map_height)
+			{
+				draw_tile_border(data, cord.x - cord.start_x, cord.y
+					- cord.start_y);
+				if (data->map1[cord.y][cord.x] == 1)
+					draw_tile(data, cord.x - cord.start_x, cord.y
+						- cord.start_y, 0xFFFFFF);
+			}
+			cord.x++;
 		}
-		x++;
-	}
-}
-
-void	fill_sealing(t_data *data, int color)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	while (x < WIDTH)
-	{
-		y = 0;
-		while (y < HEIGHT / 2)
-		{
-			my_mlx_pixel_put(data, x, y, color);
-			y++;
-		}
-		x++;
+		cord.y++;
 	}
 }
 

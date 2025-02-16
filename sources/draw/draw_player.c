@@ -22,7 +22,6 @@ void	print_player(t_data *data, int color)
 	}
 }
 
-
 void	draw_viewing_angle(t_data *data, int color)
 {
 	t_viewer	v;

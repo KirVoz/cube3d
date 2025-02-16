@@ -1,6 +1,26 @@
 #ifndef FUNC_H
 # define FUNC_H
 
+typedef struct s_draw_texture
+{
+	double		hit;
+	int			d;
+	int			tex_x;
+	int			tex_y;
+	int			color;
+}				t_draw_texture;
+
+typedef struct s_draw_map
+{
+	int			x;
+	int			y;
+	int			start_x;
+	int			start_y;
+	int			end_x;
+	int			end_y;
+	int			color;
+}				t_draw_map;
+
 typedef struct s_texture
 {
 	void		*img;
@@ -116,6 +136,11 @@ void			fill_sealing(t_data *data, int color);
 void			fill_map(t_data *data, int color);
 void			print_player(t_data *data, int color);
 int				mouse_move(int x, int y, t_data *data);
+
+void			what_texture(t_texture **t, t_ray ray, t_data *data);
+void			init_ray(t_data *data, t_ray *ray);
+void			init_ray2(t_data *data, t_ray *ray);
+void			what_side(t_ray *ray);
 
 int				render_next_frame(t_data *data);
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);

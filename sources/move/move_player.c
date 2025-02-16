@@ -2,65 +2,65 @@
 
 void	move_forward(t_data *data, double moveSpeed)
 {
-	double	newPosX;
-	double	newPosY;
+	double	newposx;
+	double	newposy;
 
-	newPosX = data->posX + data->dirX * moveSpeed;
-	newPosY = data->posY + data->dirY * moveSpeed;
-	if (newPosX >= 0 && newPosX < data->map_width && newPosY >= 0
-		&& newPosY < data->map_height && !check_collision(data, newPosX,
-			newPosY))
+	newposx = data->posX + data->dirX * moveSpeed;
+	newposy = data->posY + data->dirY * moveSpeed;
+	if (newposx >= 0 && newposx < data->map_width && newposy >= 0
+		&& newposy < data->map_height && !check_collision(data, newposx,
+			newposy))
 	{
-		data->posX = newPosX;
-		data->posY = newPosY;
+		data->posX = newposx;
+		data->posY = newposy;
 	}
 }
 
 void	move_backward(t_data *data, double moveSpeed)
 {
-	double	newPosX;
-	double	newPosY;
+	double	newposx;
+	double	newposy;
 
-	newPosX = data->posX - data->dirX * moveSpeed;
-	newPosY = data->posY - data->dirY * moveSpeed;
-	if (newPosX >= 0 && newPosX < data->map_width && newPosY >= 0
-		&& newPosY < data->map_height && !check_collision(data, newPosX,
-			newPosY))
+	newposx = data->posX - data->dirX * moveSpeed;
+	newposy = data->posY - data->dirY * moveSpeed;
+	if (newposx >= 0 && newposx < data->map_width && newposy >= 0
+		&& newposy < data->map_height && !check_collision(data, newposx,
+			newposy))
 	{
-		data->posX = newPosX;
-		data->posY = newPosY;
+		data->posX = newposx;
+		data->posY = newposy;
 	}
 }
 
 void	move_left(t_data *data, double moveSpeed)
 {
-	double	newPosX;
-	double	newPosY;
+	double	newposx;
+	double	newposy;
 
-	newPosX = data->posX - data->planeX * moveSpeed;
-	newPosY = data->posY - data->planeY * moveSpeed;
-	if (newPosX >= 0 && newPosX < data->map_width && newPosY >= 0
-		&& newPosY < data->map_height && !check_collision(data, newPosX,
-			newPosY))
+	newposx = data->posX - data->planeX * moveSpeed;
+	newposy = data->posY - data->planeY * moveSpeed;
+	if (newposx >= 0 && newposx < data->map_width && newposy >= 0
+		&& newposy < data->map_height && !check_collision(data, newposx,
+			newposy))
 	{
-		data->posX = newPosX;
-		data->posY = newPosY;
+		data->posX = newposx;
+		data->posY = newposy;
 	}
 }
 
 void	move_right(t_data *data, double moveSpeed)
 {
-	double	newPosX;
-	double	newPosY;
+	double	newposx;
+	double	newposy;
 
-	newPosX = data->posX + data->planeX * moveSpeed;
-	newPosY = data->posY + data->planeY * moveSpeed;
-	if (newPosX >= 0 && newPosX < data->map_width && newPosY >= 0
-		&& newPosY < data->map_height && !check_collision(data, newPosX,
-			newPosY))
+	newposx = data->posX + data->planeX * moveSpeed;
+	newposy = data->posY + data->planeY * moveSpeed;
+	if (newposx >= 0 && newposx < data->map_width && newposy >= 0
+		&& newposy < data->map_height && !check_collision(data, newposx,
+			newposy))
 	{
-		data->posX = newPosX;
-		data->posY = newPosY;
+		data->posX = newposx;
+		data->posY = newposy;
 	}
 }
 
