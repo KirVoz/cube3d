@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 19:18:56 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/15 16:53:58 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/15 19:33:14 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void		map_init(t_data *data, t_val *val);
 // validator
 void		extension_validation(char *map_path);
 int			open_map_validation(char *map_path);
-void		texture_open_check(t_val *val);
+void		texture_open_validation(t_val *val);
 void		map_validation(t_val *val);
 size_t		check_inline_identifiers(char *line);
 // identifiers/map_check

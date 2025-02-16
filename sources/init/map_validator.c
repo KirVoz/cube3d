@@ -6,19 +6,18 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 16:44:16 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/15 16:59:11 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/15 19:34:02 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "init.h"
 
-bool	check_map_borders(char **map);
+static bool	check_map_borders(char **map);
 
 void	map_validation(t_val *val)
 {
 	indetifiers_check(val);
 	missing_indetifiers_check(val);
-	texture_open_check(val);
 	map_structure_check(val);
 	starting_position_check(val);
 	if (!check_map_borders(&val->mapv[val->map_first_i]))
@@ -58,7 +57,7 @@ static size_t	is_border(char **map, size_t total_rows, size_t i, size_t j)
 	return (0);
 }
 
-bool	check_map_borders(char **map)
+static bool	check_map_borders(char **map)
 {
 	size_t	rows;
 	size_t	len;

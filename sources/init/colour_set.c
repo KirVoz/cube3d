@@ -1,16 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colour_set_utils.c                                 :+:      :+:    :+:   */
+/*   colour_set.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 04:47:44 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/15 17:08:15 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/15 19:31:05 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "init.h"
+
+static void	validate_commas(t_val *val);
+static char	**colour_split(t_val *val, size_t ind);
+static void	parse_validate_rgb(t_val *val, t_col_type col_type, char **res);
+static void	rgb_free(t_val *val, t_col_type col_type, char **res, size_t ind);
+
+void	colour_set(t_val *val, t_col_type col_type, size_t ind)
+{
+	char	**res;
+
+	res = NULL;
+	validate_commas(val);
+	res = colour_split(val, ind);
+	parse_validate_rgb(val, col_type, res);
+	rgb_free(val, col_type, res, ind);
+}
 
 static void	validate_commas(t_val *val)
 {
@@ -56,7 +72,7 @@ static char	**colour_split(t_val *val, size_t ind)
 	return (res);
 }
 
-static void	parse_val_rgb(t_val *val, t_col_type col_type, char **res)
+static void	parse_validate_rgb(t_val *val, t_col_type col_type, char **res)
 {
 	size_t	i;
 
@@ -95,15 +111,4 @@ static void	rgb_free(t_val *val, t_col_type col_type, char **res, size_t ind)
 	val->colours[col_type].was_parsed = true;
 	if (ind + 1 > val->indetifier_last_i)
 		val->indetifier_last_i = ind + 1;
-}
-
-void	colour_set(t_val *val, t_col_type col_type, size_t ind)
-{
-	char	**res;
-
-	res = NULL;
-	validate_commas(val);
-	res = colour_split(val, ind);
-	parse_val_rgb(val, col_type, res);
-	rgb_free(val, col_type, res, ind);
 }

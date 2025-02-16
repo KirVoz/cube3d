@@ -1,16 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture_set_utils.c                                :+:      :+:    :+:   */
+/*   texture_set.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 04:22:59 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/15 15:10:55 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/15 19:29:28 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "init.h"
+
+static char	*find_path(char *str);
+
+void	texture_set(t_val *val, t_tex_type tex_type, size_t ind)
+{
+	val->textures[tex_type].path = find_path(val->mapv[ind]);
+	val->textures[tex_type].counter++;
+	if (val->textures[tex_type].counter > 1)
+		validation_error_msg("You can set only one texture for the ",
+			val->tex_name[tex_type]);
+	val->textures[tex_type].was_parsed = true;
+	if (ind + 1 > val->indetifier_last_i)
+		val->indetifier_last_i = ind + 1;
+}
 
 static char	*find_path(char *str)
 {
@@ -32,16 +46,4 @@ static char	*find_path(char *str)
 	if (path[ft_strlen(path) - 1] == '\n')
 		path[ft_strlen(path) - 1] = '\0';
 	return (path);
-}
-
-void	texture_set(t_val *val, t_tex_type tex_type, size_t ind)
-{
-	val->textures[tex_type].path = find_path(val->mapv[ind]);
-	val->textures[tex_type].counter++;
-	if (val->textures[tex_type].counter > 1)
-		validation_error_msg("You can set only one texture for the ",
-			val->tex_name[tex_type]);
-	val->textures[tex_type].was_parsed = true;
-	if (ind + 1 > val->indetifier_last_i)
-		val->indetifier_last_i = ind + 1;
 }

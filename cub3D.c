@@ -6,12 +6,14 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 15:43:08 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/15 17:22:28 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/15 20:00:58 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "init.h"
+
+static t_data	*exit_free(t_data *data);
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -49,6 +51,8 @@ int	mouse_move(int x, int y, t_data *data)
 int	close_cub(t_data *data)
 {
 	mlx_destroy_window(data->mlx, data->win);
+	data = exit_free(data);
+	// system("leaks cub3D");
 	exit(0);
 	return (0);
 }
