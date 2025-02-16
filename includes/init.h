@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 19:18:56 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/15 19:33:14 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/16 15:25:02 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,6 @@
 # define INIT_H
 
 # include "cub3d.h"
-
-typedef enum e_tex_type
-{
-	NO,
-	SO,
-	WE,
-	EA,
-	TEX_COUNT
-}			t_tex_type;
-
-typedef enum e_colour_type
-{
-	C,
-	F,
-	COLOURS_COUNT
-}			t_col_type;
 
 typedef struct s_texture_validation
 {

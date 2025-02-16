@@ -6,13 +6,13 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:49:43 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/15 19:26:20 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/16 16:32:42 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "init.h"
 
-static void		textures_init(t_data *data, t_val *val);
+static void		textures_colour_init(t_data *data, t_val *val);
 static void		position_init(t_data *data, t_val *val);
 static void		hooks_init(t_data *data);
 static t_val	*free_val(t_val *val);
@@ -24,16 +24,25 @@ void	data_init(t_val *val, t_data *data)
 	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	data->addr = mlx_get_data_addr(data->img, &data->bpp, &data->line_length,
 			&data->endian);
-	textures_init(data, val);
+	textures_colour_init(data, val);
 	position_init(data, val);
 	map_init(data, val);
+	// size_t i = 0, j = 0;
+	// while (i < data->map_height)
+	// {
+	// 	while (j < data->map_width)
+	// 		printf("%d", data->map1[i][j++]);
+	// 	j = 0;
+	// 	i++;
+	// 	printf("\n");
+	// }
 	hooks_init(data);
 	val = free_val(val);
 	mlx_loop_hook(data->mlx, render_next_frame, data);
 	mlx_loop(data->mlx);
 }
 
-static void	textures_init(t_data *data, t_val *val)
+static void	textures_colour_init(t_data *data, t_val *val)
 {
 	size_t	i;
 
@@ -46,6 +55,12 @@ static void	textures_init(t_data *data, t_val *val)
 				&data->t[i].line_length, &data->t[i].endian);
 		i++;
 	}
+	data->colours[C] = ((val->colours[C].rgb[0] << 16)
+			| (val->colours[C].rgb[1] << 8)
+			| val->colours[C].rgb[2]);
+	data->colours[F] = ((val->colours[F].rgb[0] << 16)
+			| (val->colours[F].rgb[1] << 8)
+			| val->colours[F].rgb[2]);
 }
 
 static void	position_init(t_data *data, t_val *val)

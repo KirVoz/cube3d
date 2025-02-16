@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 15:51:39 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/15 16:57:58 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/16 16:32:31 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	map_init(t_data *data, t_val *val)
 	j = 0;
 	map_size(data, val);
 	map_alloc(data);
-	while (val->mapv[i])
+	while (i < data->map_height + val->map_first_i)
 	{
-		while (val->mapv[i][j])
+		while (j < data->map_width)
 		{
 			if (val->mapv[i][j] == '1')
 				data->map1[i - val->map_first_i][j] = 1;
@@ -34,13 +34,14 @@ void	map_init(t_data *data, t_val *val)
 					|| val->mapv[i][j] == 'S' || val->mapv[i][j] == 'W'
 					|| val->mapv[i][j] == 'E')
 				data->map1[i - val->map_first_i][j] = 0;
-			else
+			else if (val->mapv[i][j] == ' ' || j < data->map_width)
 				data->map1[i - val->map_first_i][j] = 2;
 			j++;
 		}
 		j = 0;
 		i++;
 	}
+	data->map1[i] = NULL;
 }
 
 static void	map_size(t_data *data, t_val *val)

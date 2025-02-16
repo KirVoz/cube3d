@@ -1,10 +1,5 @@
 #ifndef CUB3D_H
 # define CUB3D_H
-// # if defined(__APPLE__) && defined(__MACH__)
-// #  define OS 1
-// # elif defined(__linux__)
-// #  define OS 2
-// # endif
 # ifdef __linux__
 #  define LINUX 1
 # else
