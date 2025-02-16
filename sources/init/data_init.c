@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:49:43 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/16 16:32:42 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/16 20:50:01 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,18 @@ void	data_init(t_val *val, t_data *data)
 	textures_colour_init(data, val);
 	position_init(data, val);
 	map_init(data, val);
-	// size_t i = 0, j = 0;
-	// while (i < data->map_height)
-	// {
-	// 	while (j < data->map_width)
-	// 		printf("%d", data->map1[i][j++]);
-	// 	j = 0;
-	// 	i++;
-	// 	printf("\n");
-	// }
+	size_t	i = 0, j = 0;
+	while (i < data->map_height)
+	{
+		while (j < data->map_width)
+		{
+			printf("%d", data->map1[i][j]);
+			j++;
+		}
+		j = 0;
+		i++;
+		printf("\n");
+	}
 	hooks_init(data);
 	val = free_val(val);
 	mlx_loop_hook(data->mlx, render_next_frame, data);
