@@ -30,7 +30,9 @@ SRC =	cub3D.c \
 		$(INI_PATH)/texture_set.c \
 		$(INI_PATH)/colour_set.c \
 		$(SRC_PATH)/allocator.c \
-		$(SRC_PATH)/general_utils.c
+		$(SRC_PATH)/general_utils.c \
+		$(SRC_PATH)/doors/doors.c
+
 
 OSRC  = 	$(SRC:%.c=$(OBJ_DIR)/%.o)
 MLX   =		$(MLX_PATH)/libmlx.a

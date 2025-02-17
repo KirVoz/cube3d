@@ -86,6 +86,18 @@ void	draw_scene(t_data *data)
 		perp_wall_dist(data, &ray);
 		line_height(&ray);
 		what_texture(&t, ray, data);
+		if (data->map1[ray.mapY][ray.mapX] == 3) // Дверь
+        {
+            t_door *door = get_door(data, ray.mapX, ray.mapY);
+            if (door && door->state != DOOR_CLOSED)
+            {
+                double door_offset = door->anim_progress * TILE_SIZE;
+                if (ray.side == 0)
+                    ray.perpWallDist -= door_offset / fabs(ray.rayDirX);
+                else
+                    ray.perpWallDist -= door_offset / fabs(ray.rayDirY);
+            }
+        }
 		draw_texture(data, &ray, t);
 		ray.x++;
 	}

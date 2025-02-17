@@ -57,12 +57,15 @@ void	draw_map(t_data *data)
 			{
 				draw_tile_border(data, cord.x - cord.start_x, cord.y
 					- cord.start_y);
-				if (data->map1[cord.y][cord.x] != 0)
+				if (data->map1[cord.y][cord.x] == 0)
 					draw_tile(data, cord.x - cord.start_x, cord.y
 						- cord.start_y, 0xFFFFFF);
-				else
+				else if (data->map1[cord.y][cord.x] == 1)
 					draw_tile(data, cord.x - cord.start_x, cord.y
 						- cord.start_y, 0xFF0000);
+				else if (data->map1[cord.y][cord.x] == 2)
+					draw_tile(data, cord.x - cord.start_x, cord.y
+						- cord.start_y, 0xFFFF00);
 			}
 			cord.x++;
 		}
