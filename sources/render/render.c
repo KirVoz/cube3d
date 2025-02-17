@@ -46,7 +46,7 @@ static void	line_height(t_ray *ray)
 		ray->drawEnd = HEIGHT - 1;
 }
 
-static void	draw_texture(t_data *data, t_ray *ray, t_texture *t)
+void	draw_texture(t_data *data, t_ray *ray, t_texture *t)
 {
 	t_draw_texture	draw;
 
@@ -85,20 +85,13 @@ void	draw_scene(t_data *data)
 		ray_hit(data, &ray);
 		perp_wall_dist(data, &ray);
 		line_height(&ray);
-		what_texture(&t, ray, data);
-		if (data->map1[ray.mapY][ray.mapX] == 3) // Дверь
-        {
-            t_door *door = get_door(data, ray.mapX, ray.mapY);
-            if (door && door->state != DOOR_CLOSED)
-            {
-                double door_offset = door->anim_progress * TILE_SIZE;
-                if (ray.side == 0)
-                    ray.perpWallDist -= door_offset / fabs(ray.rayDirX);
-                else
-                    ray.perpWallDist -= door_offset / fabs(ray.rayDirY);
-            }
-        }
-		draw_texture(data, &ray, t);
+		if (data->map1[ray.mapY][ray.mapX] == 3) // Check if it's a door
+			draw_door(data, ray);
+		else
+		{
+			what_texture(&t, ray, data);
+			draw_texture(data, &ray, t);
+		}
 		ray.x++;
 	}
 }

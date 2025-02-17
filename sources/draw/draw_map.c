@@ -66,6 +66,9 @@ void	draw_map(t_data *data)
 				else if (data->map1[cord.y][cord.x] == 2)
 					draw_tile(data, cord.x - cord.start_x, cord.y
 						- cord.start_y, 0xFFFF00);
+				else if (data->map1[cord.y][cord.x] == 3)
+					draw_tile(data, cord.x - cord.start_x, cord.y
+						- cord.start_y, 0x00FF00);
 			}
 			cord.x++;
 		}

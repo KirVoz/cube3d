@@ -23,11 +23,12 @@ int	check_collision(t_data *data, double newPosX, double newPosY)
 		|| data->map1[(int)(newPosY + WALL_BUF)][(int)(newPosX)] == 1
 		|| data->map1[(int)(newPosY - WALL_BUF)][(int)(newPosX)] == 1)
 		return (1);
-	if (data->map1[(int)(newPosY)][(int)(newPosX)] == 2)
-    {
-        t_door *door = get_door(data, newPosX, newPosY);
-        if (door && door->state == DOOR_CLOSED)
-            return 1;
-    }
+	if ((data->map1[(int)(newPosY)][(int)(newPosX)] == 3
+		|| data->map1[(int)(newPosY)][(int)(newPosX + WALL_BUF)] == 3
+		|| data->map1[(int)(newPosY)][(int)(newPosX - WALL_BUF)] == 3
+		|| data->map1[(int)(newPosY + WALL_BUF)][(int)(newPosX)] == 3
+		|| data->map1[(int)(newPosY - WALL_BUF)][(int)(newPosX)] == 3)
+		&& data->door->anim_progress == DOOR_CLOSED)
+		return (1);
 	return (0);
 }

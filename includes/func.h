@@ -25,14 +25,6 @@ typedef enum e_colour_type
 	COLOURS_COUNT
 }					t_col_type;
 
-typedef struct s_door
-{
-	t_door_state	state;
-	int				x;
-	int				y;
-	float			anim_progress;
-}					t_door;
-
 typedef struct s_draw_texture
 {
 	double			hit;
@@ -64,12 +56,23 @@ typedef struct s_texture
 	int				endian;
 }					t_texture;
 
+typedef struct s_door
+{
+	t_door_state	state;
+	int				x;
+	int				y;
+	float			anim_progress;
+	t_texture		t;
+}					t_door;
+
 typedef struct s_keys
 {
 	int				w;
 	int				a;
 	int				s;
 	int				d;
+	int				door;
+	int				door_pressed;
 	int				left;
 	int				right;
 	double			moveSpeed;
@@ -112,7 +115,6 @@ typedef struct s_data
 
 	t_door			*door;
 	int				num_doors;
-	float			doors_anim_speed;
 }					t_data;
 
 typedef struct s_ray
@@ -196,9 +198,11 @@ void				*s_realloc(void *ptr, size_t old_size, size_t new_size);
 void				*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 
 void door_init(t_data *data);
+void count_doors(t_data *data);
+void	draw_door(t_data *data, t_ray ray);
+void check_door_interaction(t_data *data);
+void toggle_door(t_data *data, int x, int y);
 void door_animation(t_data *data);
-void draw_doors(t_data *data);
-void interact_with_doors(t_data *data);
-t_door *get_door(t_data *data, int x, int y);
+void	draw_texture(t_data *data, t_ray *ray, t_texture *t);
 
 #endif

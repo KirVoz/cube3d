@@ -39,6 +39,7 @@ void	data_init(t_val *val, t_data *data)
 		i++;
 		printf("\n");
 	}
+	door_init(data);
 	hooks_init(data);
 	val = free_val(val);
 	mlx_loop_hook(data->mlx, render_next_frame, data);
@@ -100,6 +101,8 @@ static void	hooks_init(t_data *data)
 	data->keys.a = 0;
 	data->keys.s = 0;
 	data->keys.d = 0;
+	data->keys.door = 0;
+	data->keys.door_pressed = 0;
 	data->keys.left = 0;
 	data->keys.right = 0;
 	data->keys.moveSpeed = 0.03;

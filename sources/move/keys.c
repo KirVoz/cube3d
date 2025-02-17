@@ -5,7 +5,10 @@ int	key_press(int keycode, t_data *data)
 	if (keycode == 53 || keycode == 65307)
 		close_cub(data);
 	if (keycode == 13 || keycode == 119)
+	{
 		data->keys.w = 1;
+		printf("w\n");
+	}
 	if (keycode == 0 || keycode == 97)
 		data->keys.a = 1;
 	if (keycode == 1 || keycode == 115)
@@ -16,6 +19,15 @@ int	key_press(int keycode, t_data *data)
 		data->keys.right = 1;
 	if (keycode == 65363 || keycode == 123)
 		data->keys.left = 1;
+	if (keycode == 101 || keycode == 69)
+	{
+		if (!data->keys.door_pressed)
+		{
+			data->keys.door = 1;
+			data->keys.door_pressed = 1;
+			printf("door 1\n");
+		}
+	}
 	return (0);
 }
 

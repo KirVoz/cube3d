@@ -5,12 +5,12 @@
       "name": "C/C++ Runner: Debug Session",
       "type": "lldb",
       "request": "launch",
-      // "args": ["maps/simple.cub"],
-      // "cwd": "/home/ykiso/cube3d",
-      // "program": "/home/ykiso/cube3d/cub3D"
-      "args": ["maps/map2.cub"],
-      "cwd": "/Users/aleks/Developer/42/cube3d",
-      "program": "/Users/aleks/Developer/42/cube3d/cub3D"
+      "args": ["maps/simple.cub"],
+      "cwd": "/home/ykiso/cube3d",
+      "program": "/home/ykiso/cube3d/cub3D"
+      // "args": ["maps/map2.cub"],
+      // "cwd": "/Users/aleks/Developer/42/cube3d",
+      // "program": "/Users/aleks/Developer/42/cube3d/cub3D"
     }
   ]
 }

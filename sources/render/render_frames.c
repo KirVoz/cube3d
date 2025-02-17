@@ -10,6 +10,7 @@ static void	draw_minimap(t_data *data)
 
 int	render_next_frame(t_data *data)
 {
+	check_door_interaction(data);
 	door_animation(data);
 	move_player(data);
 	fill_ceiling(data, data->colours[C]);
