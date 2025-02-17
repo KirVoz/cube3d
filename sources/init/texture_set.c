@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 04:22:59 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/15 19:29:28 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/17 10:16:24 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	texture_set(t_val *val, t_tex_type tex_type, size_t ind)
 		validation_error_msg("You can set only one texture for the ",
 			val->tex_name[tex_type]);
 	val->textures[tex_type].was_parsed = true;
-	if (ind + 1 > val->indetifier_last_i)
-		val->indetifier_last_i = ind + 1;
+	if (ind > val->indetifier_last_i)
+		val->indetifier_last_i = ind;
 }
 
 static char	*find_path(char *str)
