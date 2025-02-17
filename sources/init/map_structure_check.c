@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 04:44:08 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/16 15:59:33 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/17 10:26:21 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	map_structure_check(t_val *val)
 	char	*map_requirments;
 
 	map_requirments = "\nThe valid map should have closed borders of 1's"
-		"\nIt contains only following symbols: 1, 0, N, S, W, E";
+		"\nIt contains only following symbols: 1, 0, N, S, W, E, D";
 	val->map_first_i = map_start(val->mapv);
 	if (val->map_first_i == 0)
 		validation_error_msg("Map file should contain a map", map_requirments);
@@ -30,7 +30,7 @@ void	map_structure_check(t_val *val)
 		&& val->indetifier_last_i != 0)
 		validation_error_msg("A map should be positioned after "
 			"textures and colours identifiers", map_requirments);
-	i = val->indetifier_last_i + 1;
+	i = val->map_first_i;
 	while (val->mapv[i])
 	{
 		if (!is_valid_map_line(val->mapv[i]))
@@ -45,7 +45,7 @@ void	starting_position_check(t_val *val)
 	size_t	i;
 	size_t	counter;
 
-	i = val->indetifier_last_i;
+	i = val->map_first_i;
 	counter = 0;
 	while (val->mapv[i])
 	{
@@ -64,7 +64,7 @@ void	starting_position_check(t_val *val)
 	if (counter == 0)
 		validation_error_msg("You need to set at least one player", NULL);
 	val->starting_pos[0] += 0.5;
-	val->starting_pos[1] -= val->indetifier_last_i + 0.5;
+	val->starting_pos[1] -= val->map_first_i - 0.5;
 }
 
 static size_t	map_start(char **mapv)
@@ -75,8 +75,14 @@ static size_t	map_start(char **mapv)
 	while (mapv[i])
 	{
 		if (is_valid_map_line(mapv[i]))
-			return (i);
+			break ;
 		i++;
+	}
+	while (i)
+	{
+		i--;
+		if (mapv[i][0] == '\0' || mapv[i][0] == '\n')
+			return (i + 1);
 	}
 	return (0);
 }
@@ -92,7 +98,8 @@ static bool	is_valid_map_line(char *line)
 	{
 		if (line[j] != '0' && line[j] != '1' && line[j] != ' '
 			&& line[j] != 'N' && line[j] != 'S'
-			&& line[j] != 'W' && line[j] != 'E')
+			&& line[j] != 'W' && line[j] != 'E'
+			&& line[j] != 'D')
 			return (false);
 		j++;
 	}

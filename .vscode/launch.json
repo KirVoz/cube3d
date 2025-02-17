@@ -8,7 +8,7 @@
       // "args": ["maps/simple.cub"],
       // "cwd": "/home/ykiso/cube3d",
       // "program": "/home/ykiso/cube3d/cub3D"
-      "args": ["maps/long.cub"],
+      "args": ["maps/map2.cub"],
       "cwd": "/Users/aleks/Developer/42/cube3d",
       "program": "/Users/aleks/Developer/42/cube3d/cub3D"
     }

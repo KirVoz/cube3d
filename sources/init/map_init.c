@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 15:51:39 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/16 20:49:06 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/17 09:11:25 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static void	fill_row(t_data *data, t_val *val, size_t i)
 			|| val->mapv[i][j] == 'N' || val->mapv[i][j] == 'S'
 			|| val->mapv[i][j] == 'W' || val->mapv[i][j] == 'E'))
 			data->map1[i - val->map_first_i][j] = 0;
+		else if (j < str_len && (val->mapv[i][j] == 'D'))
+			data->map1[i - val->map_first_i][j] = 3;
 		else
 			data->map1[i - val->map_first_i][j] = 2;
 		j++;

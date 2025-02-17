@@ -6,69 +6,83 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 04:47:44 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/15 19:31:05 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/17 10:15:02 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "init.h"
 
-static void	validate_commas(t_val *val);
-static char	**colour_split(t_val *val, size_t ind);
+static void	validate_commas(t_val *val, size_t i);
+static char	**colour_split(t_val *val, size_t ind, size_t split_start);
 static void	parse_validate_rgb(t_val *val, t_col_type col_type, char **res);
 static void	rgb_free(t_val *val, t_col_type col_type, char **res, size_t ind);
 
 void	colour_set(t_val *val, t_col_type col_type, size_t ind)
 {
 	char	**res;
+	size_t	split_start;
 
 	res = NULL;
-	validate_commas(val);
-	res = colour_split(val, ind);
+	split_start = 0;
+	validate_commas(val, ind);
+	while (val->mapv[ind][split_start] == ' ')
+		split_start++;
+	if (val->mapv[ind][split_start] == 'C'
+		|| val->mapv[ind][split_start] == 'F')
+		split_start++;
+	while (val->mapv[ind][split_start] == ' ')
+		split_start++;
+	res = colour_split(val, ind, split_start);
 	parse_validate_rgb(val, col_type, res);
 	rgb_free(val, col_type, res, ind);
 }
 
-static void	validate_commas(t_val *val)
+static void	validate_commas(t_val *val, size_t i)
 {
-	size_t	i;
 	char	*comma;
+	size_t	counter;
 
-	i = 0;
-	while (val->mapv[i])
+	comma = ft_strchr(val->mapv[i], ',');
+	if (!comma)
+		validation_error_msg("Each RGB should be separated by 1 comma", NULL);
+	counter = 1;
+	while (comma)
 	{
-		comma = ft_strchr(val->mapv[i], ',');
-		if (comma && *(comma + 1) == ',')
-			validation_error_msg("Colours should be separated "
-				"by only 1 comma", NULL);
-		i++;
+		comma = ft_strchr(comma + 1, ',');
+		if (comma)
+			counter++;
+		if (counter == 1 || counter > 2)
+			validation_error_msg("Each RGB should be separated by 1 comma ",
+				NULL);
 	}
 }
 
-static char	**colour_split(t_val *val, size_t ind)
+static char	**colour_split(t_val *val, size_t ind, size_t split_start)
 {
 	size_t	i;
 	size_t	j;
 	char	**res;
 
 	i = 0;
-	j = 2;
-	res = ft_split(&val->mapv[ind][j], ',');
+	j = 0;
+	res = ft_split(&val->mapv[ind][split_start], ',');
 	if (!res)
 		exit_fail("Memory allocation in colour_set failed");
 	while (res[i])
 	{
 		if (i > 3)
-			validation_error_msg("RGB colours consist of 3 numbers", NULL);
+			validation_error_msg("RGB colour consist of 3 numbers", NULL);
 		while (res[i][j] && res[i][j] != '\n')
 		{
 			if (!ft_isdigit(res[i][j]))
-				validation_error_msg("Colour should consist "
-					"only of digits", NULL);
+				validation_error_msg("RGB should be positive digits", NULL);
 			j++;
 		}
 		j = 0;
 		i++;
 	}
+	if (i < 3)
+		validation_error_msg("RGB colour consists of 3 numbers", NULL);
 	return (res);
 }
 
@@ -109,6 +123,6 @@ static void	rgb_free(t_val *val, t_col_type col_type, char **res, size_t ind)
 		validation_error_msg("You can set only one RGB set of colours for the ",
 			val->col_name[col_type]);
 	val->colours[col_type].was_parsed = true;
-	if (ind + 1 > val->indetifier_last_i)
-		val->indetifier_last_i = ind + 1;
+	if (ind > val->indetifier_last_i)
+		val->indetifier_last_i = ind;
 }
