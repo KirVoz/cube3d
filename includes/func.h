@@ -121,6 +121,7 @@ typedef struct s_data
 	t_door			*door;
 	t_doors_tex		tex;
 	int				num_doors;
+	int				game_over;
 }					t_data;
 
 typedef struct s_ray

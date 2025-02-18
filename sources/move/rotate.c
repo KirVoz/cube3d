@@ -14,21 +14,29 @@ void	rotate_left_right(t_data *data, double rotSpeed)
 
 int	check_collision(t_data *data, double newPosX, double newPosY)
 {
-	if (newPosX < 0 || newPosX >= data->map_width || newPosY < 0
-		|| newPosY >= data->map_height)
-		return (1);
-	if (data->map1[(int)(newPosY)][(int)(newPosX)] == 1
-		|| data->map1[(int)(newPosY)][(int)(newPosX + WALL_BUF)] == 1
-		|| data->map1[(int)(newPosY)][(int)(newPosX - WALL_BUF)] == 1
-		|| data->map1[(int)(newPosY + WALL_BUF)][(int)(newPosX)] == 1
-		|| data->map1[(int)(newPosY - WALL_BUF)][(int)(newPosX)] == 1)
-		return (1);
-	if ((data->map1[(int)(newPosY)][(int)(newPosX)] == 3
-		|| data->map1[(int)(newPosY)][(int)(newPosX + WALL_BUF)] == 3
-		|| data->map1[(int)(newPosY)][(int)(newPosX - WALL_BUF)] == 3
-		|| data->map1[(int)(newPosY + WALL_BUF)][(int)(newPosX)] == 3
-		|| data->map1[(int)(newPosY - WALL_BUF)][(int)(newPosX)] == 3)
-		&& data->door->anim_progress == DOOR_CLOSED)
-		return (1);
-	return (0);
+	int	i;
+
+	i = -1;
+    if (newPosX < 0 || newPosX >= data->map_width || newPosY < 0
+        || newPosY >= data->map_height)
+        return (1);
+    if (data->map1[(int)(newPosY)][(int)(newPosX)] == 1
+        || data->map1[(int)(newPosY)][(int)(newPosX + WALL_BUF)] == 1
+        || data->map1[(int)(newPosY)][(int)(newPosX - WALL_BUF)] == 1
+        || data->map1[(int)(newPosY + WALL_BUF)][(int)(newPosX)] == 1
+        || data->map1[(int)(newPosY - WALL_BUF)][(int)(newPosX)] == 1)
+        return (1);
+    while (++i < data->num_doors)
+    {
+        if ((data->door[i].x == (int)newPosX && data->door[i].y == (int)newPosY)
+            || (data->door[i].x == (int)(newPosX + WALL_BUF) && data->door[i].y == (int)newPosY)
+            || (data->door[i].x == (int)(newPosX - WALL_BUF) && data->door[i].y == (int)newPosY)
+            || (data->door[i].x == (int)newPosX && data->door[i].y == (int)(newPosY + WALL_BUF))
+            || (data->door[i].x == (int)newPosX && data->door[i].y == (int)(newPosY - WALL_BUF)))
+        {
+            if (data->door[i].state != DOOR_OPEN)
+                return (1);
+        }
+    }
+    return (0);
 }

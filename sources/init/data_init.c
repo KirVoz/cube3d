@@ -109,6 +109,7 @@ static void	hooks_init(t_data *data)
 	data->mouse.sense = 0.01;
 	data->mouse.rotSpeed = 0.85 * (PI / 180);
 	data->pitch = 0;
+	data->game_over = 0;
 	hooks(data);
 }
 
