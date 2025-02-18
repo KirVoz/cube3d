@@ -65,6 +65,11 @@ typedef struct s_door
 	t_texture		t;
 }					t_door;
 
+typedef struct s_doors_tex
+{
+	t_texture		t[4];
+}					t_doors_tex;
+
 typedef struct s_keys
 {
 	int				w;
@@ -114,6 +119,7 @@ typedef struct s_data
 	int				colours[COLOURS_COUNT];
 
 	t_door			*door;
+	t_doors_tex		tex;
 	int				num_doors;
 }					t_data;
 
@@ -204,5 +210,6 @@ void check_door_interaction(t_data *data);
 void toggle_door(t_data *data, int x, int y);
 void door_animation(t_data *data);
 void	draw_texture(t_data *data, t_ray *ray, t_texture *t);
+int check_door(t_data *data, int posx, int posy);
 
 #endif
