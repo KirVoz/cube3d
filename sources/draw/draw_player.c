@@ -66,14 +66,18 @@ static void	validate_v(t_data *data, t_viewer *v)
 
 void	draw_lines(t_data *data, t_viewer *v)
 {
+	int dx;
+	int dy;
+
 	validate_v(data, v);
 	while (1)
 	{
 		if (v->x0 >= 0 && v->x0 < WIDTH && v->y0 >= 0 && v->y0 < HEIGHT)
 		{
-			if (data->map1[(int)(data->posY - MINIMAP_SIZE_H / 2 + v->y0
-					/ TILE_SIZE)][(int)(data->posX - MINIMAP_SIZE_W / 2 + v->x0
-					/ TILE_SIZE)] == 1)
+			dx = (int)(data->posX - MINIMAP_SIZE_W / 2 + v->x0 / TILE_SIZE);
+			dy = (int)(data->posY - MINIMAP_SIZE_H / 2 + v->y0 / TILE_SIZE);
+			if (((data->map1[dy][dx] == 1) || (data->map1[dy][dx] == 2)) && dx >= 0 && dx < (int)data->map_width
+				&& dy >= 0 && dy < (int)data->map_height)
 				break ;
 			my_mlx_pixel_put(data, v->x0, v->y0, v->color);
 		}
