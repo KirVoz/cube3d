@@ -16,7 +16,7 @@ int	key_press(int keycode, t_data *data)
 		data->keys.right = 1;
 	if (keycode == 65363 || keycode == 123)
 		data->keys.left = 1;
-	if (keycode == 101 || keycode == 69)
+	if (keycode == 101 || keycode == 69 || keycode == 14)
 	{
 		if (!data->keys.door_pressed)
 		{

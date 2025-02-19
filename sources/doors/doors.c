@@ -184,9 +184,6 @@ void	door_init(t_data *data)
 
 	init_door_tex(data, &tex);
 	data->tex = tex;
-	count_doors(data);
-	data->door = (t_door *)malloc(data->num_doors * sizeof(t_door));
-	if (!data->door)
-		exit_fail("Failed to allocate memory for doors");
+	data->door = (t_door *)s_alloc(data->num_doors, sizeof(t_door));
 	door_init2(data);
 }

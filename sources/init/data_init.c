@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:49:43 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/17 09:39:10 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:54:55 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ void	data_init(t_val *val, t_data *data)
 		i++;
 		printf("\n");
 	}
-	door_init(data);
+	count_doors(data);
+	if (data->num_doors > 0)
+		door_init(data);
 	hooks_init(data);
 	val = free_val(val);
 	mlx_loop_hook(data->mlx, render_next_frame, data);

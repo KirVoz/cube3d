@@ -6,7 +6,7 @@
 /*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 15:43:08 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/16 15:47:09 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/19 19:04:44 by aaleksee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ static t_data	*exit_free(t_data *data)
 	i = 0;
 	while (i < data->map_height)
 		free(data->map1[i++]);
+	if (data->num_doors > 0)
+		free((void *)data->door);
 	free(data->map1);
 	free(data);
 	return (NULL);
