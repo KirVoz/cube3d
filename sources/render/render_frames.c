@@ -37,19 +37,19 @@ int	render_next_frame(t_data *data)
 	}
 	else
 	{
-		if (data->map1[(int)data->posY][(int)data->posX] == 3)
+		if (data->map1[(int)data->pos_y][(int)data->pos_x] == 3)
 			data->game_over = 1;
 		else
-			{
-				check_door_interaction(data);
-				door_animation(data);
-				move_player(data);
-				fill_ceiling(data, data->colours[C]);
-				fill_floor(data, data->colours[F]);
-				draw_scene(data);
-				draw_minimap(data);
-				mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
-			}
+		{
+			check_door_interaction(data);
+			door_animation(data);
+			move_player(data);
+			fill_ceiling(data, data->colours[C]);
+			fill_floor(data, data->colours[F]);
+			draw_scene(data);
+			draw_minimap(data);
+			mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+		}
 	}
 	return (0);
 }

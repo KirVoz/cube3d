@@ -80,15 +80,15 @@ typedef struct s_keys
 	int				door_pressed;
 	int				left;
 	int				right;
-	double			moveSpeed;
+	double			ms;
 }					t_keys;
 
 typedef struct s_mouse
 {
 	double			sense;
-	double			rotSpeed;
-	double			oldDirX;
-	double			oldPlaneX;
+	double			rot_speed;
+	double			old_d_x;
+	double			old_pl_x;
 }					t_mouse;
 
 typedef struct s_data
@@ -101,12 +101,12 @@ typedef struct s_data
 	int				line_length;
 	int				endian;
 	double			pitch;
-	double			posX;
-	double			posY;
-	double			dirX;
-	double			dirY;
-	double			planeX;
-	double			planeY;
+	double			pos_x;
+	double			pos_y;
+	double			dir_x;
+	double			dir_y;
+	double			plane_x;
+	double			plane_y;
 
 	int				**map1;
 	size_t			map_height;
@@ -126,24 +126,24 @@ typedef struct s_data
 
 typedef struct s_ray
 {
-	double			cameraX;
-	double			rayDirX;
-	double			rayDirY;
-	int				mapX;
-	int				mapY;
-	double			deltaDistX;
-	double			deltaDistY;
-	double			sideDistX;
-	double			sideDistY;
-	int				stepX;
-	int				stepY;
+	double			cam_x;
+	double			raydir_x;
+	double			raydir_y;
+	int				map_x;
+	int				map_y;
+	double			delta_dist_x;
+	double			delta_dist_y;
+	double			side_dist_x;
+	double			side_dist_y;
+	int				step_x;
+	int				step_y;
 	int				hit;
 	char			hit_side;
 	int				side;
-	double			perpWallDist;
-	int				lineHeight;
-	int				drawStart;
-	int				drawEnd;
+	double			perp_wall_dist;
+	int				line_height;
+	int				draw_start;
+	int				draw_end;
 	int				x;
 	int				y;
 	int				color;
@@ -172,12 +172,14 @@ typedef struct s_viewer
 int					key_press(int keycode, t_data *data);
 int					key_release(int keycode, t_data *data);
 void				move_player(t_data *data);
-void				rotate_left_right(t_data *data, double rotSpeed);
-int					check_collision(t_data *data, double newPosX,
-						double newPosY);
+void				rotate_left_right(t_data *data, double rot_speed);
+int					check_collision(t_data *data, double newpos_x,
+						double newpos_y);
 
 void				draw_map(t_data *data);
 void				draw_scene(t_data *data);
+void				draw_tile(t_data *data, int x, int y, int color);
+void				draw_tile_border(t_data *data, int x, int y);
 void				fill_floor(t_data *data, int color);
 void				fill_ceiling(t_data *data, int color);
 void				fill_map(t_data *data, int color);
@@ -204,13 +206,13 @@ void				*s_alloc(size_t count, size_t size);
 void				*s_realloc(void *ptr, size_t old_size, size_t new_size);
 void				*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 
-void door_init(t_data *data);
-void count_doors(t_data *data);
-void	draw_door(t_data *data, t_ray ray);
-void check_door_interaction(t_data *data);
-void toggle_door(t_data *data, int x, int y);
-void door_animation(t_data *data);
-void	draw_texture(t_data *data, t_ray *ray, t_texture *t);
-int check_door(t_data *data, int posx, int posy);
+void				door_init(t_data *data);
+void				count_doors(t_data *data);
+void				draw_door(t_data *data, t_ray ray);
+void				check_door_interaction(t_data *data);
+void				toggle_door(t_data *data, int x, int y);
+void				door_animation(t_data *data);
+void				draw_texture(t_data *data, t_ray *ray, t_texture *t);
+int					check_door(t_data *data, int pos_x, int pos_y);
 
 #endif

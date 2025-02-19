@@ -27,7 +27,7 @@ void	data_init(t_val *val, t_data *data)
 	textures_colour_init(data, val);
 	position_init(data, val);
 	map_init(data, val);
-	size_t	i = 0, j = 0;
+	size_t i = 0, j = 0;
 	while (i < data->map_height)
 	{
 		while (j < data->map_width)
@@ -69,30 +69,30 @@ static void	textures_colour_init(t_data *data, t_val *val)
 
 static void	position_init(t_data *data, t_val *val)
 {
-	data->posX = val->starting_pos[0];
-	data->posY = val->starting_pos[1];
+	data->pos_x = val->starting_pos[0];
+	data->pos_y = val->starting_pos[1];
 	if (val->direction == 'S')
 	{
-		data->dirX = 0;
-		data->dirY = 1;
+		data->dir_x = 0;
+		data->dir_y = 1;
 	}
 	else if (val->direction == 'N')
 	{
-		data->dirX = 0;
-		data->dirY = -1;
+		data->dir_x = 0;
+		data->dir_y = -1;
 	}
 	else if (val->direction == 'W')
 	{
-		data->dirX = -1;
-		data->dirY = 0;
+		data->dir_x = -1;
+		data->dir_y = 0;
 	}
 	else if (val->direction == 'E')
 	{
-		data->dirX = 1;
-		data->dirY = 0;
+		data->dir_x = 1;
+		data->dir_y = 0;
 	}
-	data->planeX = -data->dirY * planeLen;
-	data->planeY = data->dirX * planeLen;
+	data->plane_x = -data->dir_y * planeLen;
+	data->plane_y = data->dir_x * planeLen;
 }
 
 static void	hooks_init(t_data *data)
@@ -105,9 +105,9 @@ static void	hooks_init(t_data *data)
 	data->keys.door_pressed = 0;
 	data->keys.left = 0;
 	data->keys.right = 0;
-	data->keys.moveSpeed = 0.03;
+	data->keys.ms = 0.03;
 	data->mouse.sense = 0.01;
-	data->mouse.rotSpeed = 0.85 * (PI / 180);
+	data->mouse.rot_speed = 0.85 * (PI / 180);
 	data->pitch = 0;
 	data->game_over = 0;
 	hooks(data);

@@ -16,7 +16,7 @@ SRC =	cub3D.c \
 		$(MOV_PATH)/rotate.c \
 		$(DRW_PATH)/draw_map.c \
 		$(DRW_PATH)/draw_player.c \
-		$(DRW_PATH)/draw_floor_sealing.c \
+		$(DRW_PATH)/draw_utils.c \
 		$(RND_PATH)/render_frames.c \
 		$(RND_PATH)/render.c \
 		$(RND_PATH)/render_utils.c \
@@ -31,7 +31,9 @@ SRC =	cub3D.c \
 		$(INI_PATH)/colour_set.c \
 		$(SRC_PATH)/allocator.c \
 		$(SRC_PATH)/general_utils.c \
-		$(SRC_PATH)/doors/doors.c
+		$(SRC_PATH)/doors/doors.c \
+		$(SRC_PATH)/doors/doors_anim.c \
+		$(SRC_PATH)/doors/doors_init.c
 
 
 OSRC  = 	$(SRC:%.c=$(OBJ_DIR)/%.o)

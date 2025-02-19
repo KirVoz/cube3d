@@ -30,17 +30,17 @@ int	mouse_move(int x, int y, t_data *data)
 
 	prev_x = WIDTH / 2;
 	prev_y = HEIGHT / 2;
-	data->mouse.rotSpeed = (x - prev_x) * data->mouse.sense;
-	data->mouse.oldDirX = data->dirX;
-	data->dirX = data->dirX * cos(-data->mouse.rotSpeed) - data->dirY
-		* sin(-data->mouse.rotSpeed);
-	data->dirY = data->mouse.oldDirX * sin(-data->mouse.rotSpeed) + data->dirY
-		* cos(-data->mouse.rotSpeed);
-	data->mouse.oldPlaneX = data->planeX;
-	data->planeX = data->planeX * cos(-data->mouse.rotSpeed) - data->planeY
-		* sin(-data->mouse.rotSpeed);
-	data->planeY = data->mouse.oldPlaneX * sin(-data->mouse.rotSpeed)
-		+ data->planeY * cos(-data->mouse.rotSpeed);
+	data->mouse.rot_speed = (x - prev_x) * data->mouse.sense;
+	data->mouse.old_d_x = data->dir_x;
+	data->dir_x = data->dir_x * cos(-data->mouse.rot_speed) - data->dir_y
+		* sin(-data->mouse.rot_speed);
+	data->dir_y = data->mouse.old_d_x * sin(-data->mouse.rot_speed) + data->dir_y
+		* cos(-data->mouse.rot_speed);
+	data->mouse.old_pl_x = data->plane_x;
+	data->plane_x = data->plane_x * cos(-data->mouse.rot_speed) - data->plane_y
+		* sin(-data->mouse.rot_speed);
+	data->plane_y = data->mouse.old_pl_x * sin(-data->mouse.rot_speed)
+		+ data->plane_y * cos(-data->mouse.rot_speed);
 	data->pitch = y - prev_y;
 	mlx_mouse_move(data->win, WIDTH / 2, HEIGHT / 2);
 	prev_x = WIDTH / 2;

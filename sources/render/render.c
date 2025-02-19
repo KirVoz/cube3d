@@ -5,19 +5,19 @@ static void	ray_hit(t_data *data, t_ray *ray)
 	ray->hit = 0;
 	while (ray->hit == 0)
 	{
-		if (ray->sideDistX < ray->sideDistY)
+		if (ray->side_dist_x < ray->side_dist_y)
 		{
-			ray->sideDistX += ray->deltaDistX;
-			ray->mapX += ray->stepX;
+			ray->side_dist_x += ray->delta_dist_x;
+			ray->map_x += ray->step_x;
 			ray->side = 0;
 		}
 		else
 		{
-			ray->sideDistY += ray->deltaDistY;
-			ray->mapY += ray->stepY;
+			ray->side_dist_y += ray->delta_dist_y;
+			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (data->map1[ray->mapY][ray->mapX] > 0)
+		if (data->map1[ray->map_y][ray->map_x] > 0)
 		{
 			ray->hit = 1;
 			what_side(ray);
@@ -28,22 +28,22 @@ static void	ray_hit(t_data *data, t_ray *ray)
 static void	perp_wall_dist(t_data *data, t_ray *ray)
 {
 	if (ray->side == 0)
-		ray->perpWallDist = (ray->mapX - data->posX + (1 - ray->stepX) / 2.0)
-			/ ray->rayDirX;
+		ray->perp_wall_dist = (ray->map_x - data->pos_x + (1 - ray->step_x)
+				/ 2.0) / ray->raydir_x;
 	else
-		ray->perpWallDist = (ray->mapY - data->posY + (1 - ray->stepY) / 2.0)
-			/ ray->rayDirY;
+		ray->perp_wall_dist = (ray->map_y - data->pos_y + (1 - ray->step_y)
+				/ 2.0) / ray->raydir_y;
 }
 
 static void	line_height(t_ray *ray)
 {
-	ray->lineHeight = (int)(HEIGHT / ray->perpWallDist);
-	ray->drawStart = -ray->lineHeight / 2 + HEIGHT / 2;
-	if (ray->drawStart < 0)
-		ray->drawStart = 0;
-	ray->drawEnd = ray->lineHeight / 2 + HEIGHT / 2;
-	if (ray->drawEnd >= HEIGHT)
-		ray->drawEnd = HEIGHT - 1;
+	ray->line_height = (int)(HEIGHT / ray->perp_wall_dist);
+	ray->draw_start = -ray->line_height / 2 + HEIGHT / 2;
+	if (ray->draw_start < 0)
+		ray->draw_start = 0;
+	ray->draw_end = ray->line_height / 2 + HEIGHT / 2;
+	if (ray->draw_end >= HEIGHT)
+		ray->draw_end = HEIGHT - 1;
 }
 
 void	draw_texture(t_data *data, t_ray *ray, t_texture *t)
@@ -51,20 +51,20 @@ void	draw_texture(t_data *data, t_ray *ray, t_texture *t)
 	t_draw_texture	draw;
 
 	if (ray->side == 0)
-		draw.hit = data->posY + ray->perpWallDist * ray->rayDirY;
+		draw.hit = data->pos_y + ray->perp_wall_dist * ray->raydir_y;
 	else
-		draw.hit = data->posX + ray->perpWallDist * ray->rayDirX;
+		draw.hit = data->pos_x + ray->perp_wall_dist * ray->raydir_x;
 	draw.hit -= floor(draw.hit);
 	draw.tex_x = (int)(draw.hit * (double)(t->width));
-	if (ray->side == 0 && ray->rayDirX > 0)
+	if (ray->side == 0 && ray->raydir_x > 0)
 		draw.tex_x = t->width - draw.tex_x - 1;
-	if (ray->side == 1 && ray->rayDirY < 0)
+	if (ray->side == 1 && ray->raydir_y < 0)
 		draw.tex_x = t->width - draw.tex_x - 1;
-	ray->y = ray->drawStart;
-	while (ray->y < ray->drawEnd)
+	ray->y = ray->draw_start;
+	while (ray->y < ray->draw_end)
 	{
-		draw.d = ray->y * 256 - HEIGHT * 128 + ray->lineHeight * 128;
-		draw.tex_y = ((draw.d * t->height) / ray->lineHeight) / 256;
+		draw.d = ray->y * 256 - HEIGHT * 128 + ray->line_height * 128;
+		draw.tex_y = ((draw.d * t->height) / ray->line_height) / 256;
 		draw.color = *(int *)(t->addr + (draw.tex_y * t->line_length
 					+ draw.tex_x * (t->bpp / 8)));
 		my_mlx_pixel_put(data, ray->x, ray->y, draw.color);
@@ -85,7 +85,7 @@ void	draw_scene(t_data *data)
 		ray_hit(data, &ray);
 		perp_wall_dist(data, &ray);
 		line_height(&ray);
-		if (data->map1[ray.mapY][ray.mapX] == 3) // Check if it's a door
+		if (data->map1[ray.map_y][ray.map_x] == 3)
 			draw_door(data, ray);
 		else
 		{
