@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
+/*   By: kvoznese <kvoznese@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:49:43 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/19 18:54:55 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/22 18:04:51 by kvoznese         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,6 @@ void	data_init(t_val *val, t_data *data)
 	textures_colour_init(data, val);
 	position_init(data, val);
 	map_init(data, val);
-	size_t i = 0, j = 0;
-	while (i < data->map_height)
-	{
-		while (j < data->map_width)
-		{
-			printf("%d", data->map1[i][j]);
-			j++;
-		}
-		j = 0;
-		i++;
-		printf("\n");
-	}
 	count_doors(data);
 	if (data->num_doors > 0)
 		door_init(data);
@@ -93,8 +81,8 @@ static void	position_init(t_data *data, t_val *val)
 		data->dir_x = 1;
 		data->dir_y = 0;
 	}
-	data->plane_x = -data->dir_y * planeLen;
-	data->plane_y = data->dir_x * planeLen;
+	data->plane_x = -data->dir_y * (FOV / 2 * PI / 180);
+	data->plane_y = data->dir_x * (FOV / 2 * PI / 180);
 }
 
 static void	hooks_init(t_data *data)
