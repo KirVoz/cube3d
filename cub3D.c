@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaleksee <aaleksee@student.42yerevan.am    +#+  +:+       +#+        */
+/*   By: kvoznese <kvoznese@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 15:43:08 by aaleksee          #+#    #+#             */
-/*   Updated: 2025/02/19 19:04:44 by aaleksee         ###   ########.fr       */
+/*   Updated: 2025/02/22 18:47:41 by kvoznese         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "init.h"
-
-static t_data	*exit_free(t_data *data);
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -34,8 +32,8 @@ int	mouse_move(int x, int y, t_data *data)
 	data->mouse.old_d_x = data->dir_x;
 	data->dir_x = data->dir_x * cos(-data->mouse.rot_speed) - data->dir_y
 		* sin(-data->mouse.rot_speed);
-	data->dir_y = data->mouse.old_d_x * sin(-data->mouse.rot_speed) + data->dir_y
-		* cos(-data->mouse.rot_speed);
+	data->dir_y = data->mouse.old_d_x * sin(-data->mouse.rot_speed)
+		+ data->dir_y * cos(-data->mouse.rot_speed);
 	data->mouse.old_pl_x = data->plane_x;
 	data->plane_x = data->plane_x * cos(-data->mouse.rot_speed) - data->plane_y
 		* sin(-data->mouse.rot_speed);
@@ -52,7 +50,6 @@ int	close_cub(t_data *data)
 {
 	mlx_destroy_window(data->mlx, data->win);
 	data = exit_free(data);
-	// system("leaks cub3D");
 	exit(0);
 	return (0);
 }
@@ -64,20 +61,6 @@ void	hooks(t_data *data)
 	mlx_hook(data->win, 17, 1L << 17, close_cub, data);
 	if (!LINUX)
 		mlx_hook(data->win, 6, 1L << 6, mouse_move, data);
-}
-
-static t_data	*exit_free(t_data *data)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < data->map_height)
-		free(data->map1[i++]);
-	if (data->num_doors > 0)
-		free((void *)data->door);
-	free(data->map1);
-	free(data);
-	return (NULL);
 }
 
 int	main(int argc, char **argv)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   func.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kvoznese <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kvoznese <kvoznese@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 17:58:27 by kvoznese          #+#    #+#             */
-/*   Updated: 2025/02/22 17:58:42 by kvoznese         ###   ########.fr       */
+/*   Updated: 2025/02/22 18:47:49 by kvoznese         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,5 +226,6 @@ void				toggle_door(t_data *data, int x, int y);
 void				door_animation(t_data *data);
 void				draw_texture(t_data *data, t_ray *ray, t_texture *t);
 int					check_door(t_data *data, int pos_x, int pos_y);
+t_data				*exit_free(t_data *data);
 
 #endif
